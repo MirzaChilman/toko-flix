@@ -1,0 +1,20 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+
+.main-title {
+  color: white;
+  text-align: center;
+  text-transform: capitalize;
+  padding: 0.7em 0;
+}
+
+.wrapper {
+  display: flex;
+  padding: 1em 0;
+  overflow-x: auto;
+}
+
+.wrapper .title {
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 10px;
+}

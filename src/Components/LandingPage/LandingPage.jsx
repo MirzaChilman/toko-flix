@@ -1,5 +1,12 @@
 import React from 'react';
+import Banner from './Banner/Banner';
+import Kartu from '../Kartu/Kartu';
 
-const landingPage = () => <h1>landingPage</h1>;
+const landingPage = () => (
+  <React.Fragment>
+    <Kartu />
+    <Kartu />
+  </React.Fragment>
+);
 
 export default landingPage;

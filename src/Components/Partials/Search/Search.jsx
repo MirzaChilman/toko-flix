@@ -5,12 +5,12 @@ import searchIcon from '../../../assets/search-icon.png';
 
 class Search extends Component {
   state = {
-    search: ''
+    search: '',
   };
 
   handleChange = e => {
     this.setState({
-      search: e.target.value
+      search: e.target.value,
     });
   };
   render() {
@@ -26,7 +26,7 @@ class Search extends Component {
         />
 
         <Link to="/search" onClick={this.handleClick}>
-          <img className="search-icon" src={searchIcon} />
+          <img className="search-icon" src={searchIcon} alt={searchIcon} />
         </Link>
       </React.Fragment>
     );

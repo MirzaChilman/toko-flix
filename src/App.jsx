@@ -4,7 +4,7 @@ import Header from './Components/Partials/Header';
 import Footer from './Components/Partials/Footer';
 import NotFound from './Components/NotFound/NotFound';
 import LandingPage from './Components/LandingPage/LandingPage';
-
+import Movie from './Components/Movie/Movie';
 import './App.css';
 import './global.css';
 
@@ -24,6 +24,15 @@ class App extends Component {
             render={() => (
               <React.Fragment>
                 <LandingPage />
+              </React.Fragment>
+            )}
+          />
+          <Route
+            exact
+            path="/movie"
+            render={() => (
+              <React.Fragment>
+                <Movie />
               </React.Fragment>
             )}
           />
