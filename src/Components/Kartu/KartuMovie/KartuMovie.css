@@ -5,23 +5,16 @@
   text-transform: capitalize;
   padding: 0.7em 0; }
 
-.wrapper {
-  display: flex;
-  padding: 1em 0;
-  overflow-x: auto; }
-
-.wrapper .title {
-  color: #1a1a1a;
-  text-align: center;
-  margin-bottom: 10px; }
-
 .content {
   position: relative;
   width: 60%;
-  min-width: 150px;
-  margin: auto;
+  min-width: 250px;
   overflow: hidden;
   padding: 0 5px; }
+  .content .content-title {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 10px; }
 
 .content .content-overlay {
   background: rgba(53, 28, 28, 0.7);
@@ -41,7 +34,10 @@
   opacity: 1; }
 
 .content-image {
-  width: 100%; }
+  width: 100%;
+  object-fit: cover;
+  max-height: 100%;
+  min-height: 100%; }
 
 .content-details {
   position: absolute;

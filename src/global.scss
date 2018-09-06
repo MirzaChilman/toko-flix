@@ -12,6 +12,7 @@
 
 body {
   background: linear-gradient(rgba(0, 0, 0, 0.8), rgb(22, 22, 22));
+  color: white;
 }
 
 .kontainer {
@@ -60,10 +61,22 @@ body {
 }
 
 .button {
-  padding: 10px 15px;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .button--secondary {
+  border: 2px solid $color-secondary;
+  color: black;
+  border: 0px;
+  border-radius: 25px;
+}
+
+.button--tertiary {
   background-color: $color-tertiary;
   color: white;
   border: 0px;

@@ -58,7 +58,7 @@ export default class Header extends React.Component {
               </UncontrolledDropdown>
               <NavItem>
                 <NavLink href="/components/" className="text-danger">
-                  Pricing
+                  Movie
                 </NavLink>
               </NavItem>
               <NavItem>

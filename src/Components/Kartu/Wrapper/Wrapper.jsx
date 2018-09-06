@@ -1,4 +1,5 @@
 import React from 'react';
+import './Wrapper.css';
 
 const wrapper = (props) => {
   // eslint-disable-next-line

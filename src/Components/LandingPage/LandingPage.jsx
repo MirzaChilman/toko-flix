@@ -5,7 +5,6 @@ import Kartu from '../Kartu/Kartu';
 const landingPage = () => (
   <React.Fragment>
     <Kartu />
-    <Kartu />
   </React.Fragment>
 );
 

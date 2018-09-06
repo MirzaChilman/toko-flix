@@ -1,5 +1,6 @@
 import React from 'react';
+import MovieDetail from './MovieDetail/MovieDetail';
 
-const Movie = () => <h1>Movie</h1>;
+const Movie = ({ match }) => <MovieDetail match={match} />;
 
 export default Movie;

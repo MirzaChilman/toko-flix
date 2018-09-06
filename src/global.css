@@ -17,6 +17,7 @@ body {
   display: flex;
   margin: 15px;
   padding: 15px;
+  background-color: red;
 }
 
 .anchor--unstyle {
@@ -55,15 +56,4 @@ body {
 
 .text-heavy {
   font-weight: bolder;
-}
-
-.button {
-  padding: 10px 15px;
-}
-
-.button--secondary {
-  background-color: #4717f6;
-  color: white;
-  border: 0px;
-  border-radius: 25px;
 }

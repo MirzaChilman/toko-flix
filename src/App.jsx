@@ -29,10 +29,10 @@ class App extends Component {
           />
           <Route
             exact
-            path="/movie"
-            render={() => (
+            path="/movie/detail/:movieId"
+            render={({ match }) => (
               <React.Fragment>
-                <Movie />
+                <Movie match={match} />
               </React.Fragment>
             )}
           />
