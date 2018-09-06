@@ -1,0 +1,8 @@
+@import '../../vars.scss';
+.footer {
+  display: flex;
+  background-color: $background-color-primary;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}

@@ -1,0 +1,16 @@
+@import '../../../vars.scss';
+
+.search {
+  border: 0px;
+  background-color: $background-color-primary;
+  color: $color-quartery;
+  padding: 5px 0px;
+  &:focus {
+    border-bottom: 1px solid white;
+  }
+}
+img.search-icon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: '5px';
+}

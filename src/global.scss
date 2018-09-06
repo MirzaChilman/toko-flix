@@ -1,0 +1,57 @@
+@import './vars.scss';
+
+.kontainer {
+  display: flex;
+  margin: 15px;
+  padding: 15px;
+  background-color: red;
+}
+
+.anchor--unstyle {
+  text-decoration: none;
+  border-bottom: 0px;
+  &:hover {
+    color: white;
+    border-bottom: 0px solid;
+    background-color: $color-1;
+  }
+}
+
+.text-primary {
+  color: $color-primary;
+}
+
+.text-secondary {
+  color: $color-2;
+}
+
+.text-tertiary {
+  color: $color-tertiary;
+}
+
+.text-quartery {
+  color: $color-quartery;
+}
+
+.text-danger {
+  color: red;
+}
+
+.text-medium {
+  font-weight: 500;
+}
+
+.text-heavy {
+  font-weight: bolder;
+}
+
+.button {
+  padding: 10px 15px;
+}
+
+.button--secondary {
+  background-color: $color-2;
+  color: white;
+  border: 0px;
+  border-radius: 25px;
+}

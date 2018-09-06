@@ -1,0 +1,12 @@
+.search {
+  border: 0px;
+  background-color: #343a40;
+  color: #e7dfdd;
+  padding: 5px 0px; }
+  .search:focus {
+    border-bottom: 1px solid white; }
+
+img.search-icon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: '5px'; }
