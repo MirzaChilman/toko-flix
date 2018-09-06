@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Header from './Components/Partials/Header';
@@ -9,10 +10,6 @@ import './App.css';
 import './global.css';
 
 class App extends Component {
-  componentDidMount() {
-    console.log('ad');
-  }
-
   render() {
     return (
       <React.Fragment>

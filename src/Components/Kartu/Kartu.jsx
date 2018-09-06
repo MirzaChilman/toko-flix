@@ -4,38 +4,44 @@ import KartuMovie from './KartuMovie/KartuMovie';
 import axios from 'axios';
 import Wrapper from './Wrapper/Wrapper';
 import Spinner from '../Spinner/Spinner';
-
+import { connect } from 'react-redux';
+import {
+  fetchIndonesia,
+  fetchRecommendation,
+  fetchAlike,
+} from '../../Redux/Actions/MovieListActions';
 class Kartu extends Component {
   state = {
-    data: [],
     isLoading: true,
   };
-  componentDidMount() {
-    axios
-      .get(
-        'https://api.themoviedb.org/3/movie/now_playing?api_key=ae4dc1e91f4721e7f574d512da8263fd&language=en-US&page=1&region=ID'
-      )
-      .then(response =>
-        this.setState({ data: response.data.results, isLoading: false })
-      );
+
+  componentWillMount() {
+    this.props.fetchIndonesia();
+    this.props.fetchRecommendation();
+    this.props.fetchAlike();
   }
 
   render() {
+    console.log(this.props.movieIndonesia);
+
     return (
       <React.Fragment>
         <p className="mt-5 text-danger">Now Playing in Indonesia</p>
         <Wrapper>
-          {this.state.isLoading ? (
-            <Spinner />
-          ) : (
-            this.state.data.map(datum => {
-              return <KartuMovie {...datum} />;
-            })
-          )}
+          {this.props.movieIndonesia.map(datum => {
+            return <KartuMovie key={datum.id} {...datum} />;
+          })}
         </Wrapper>
       </React.Fragment>
     );
   }
 }
-
-export default Kartu;
+const mapStateToProps = state => ({
+  movieIndonesia: state.movieList.movieIndonesia,
+  movieRecommendations: state.movieList.movieRecommendations,
+  movieAlike: state.movieList.movieAlike,
+});
+export default connect(
+  mapStateToProps,
+  { fetchIndonesia, fetchRecommendation, fetchAlike }
+)(Kartu);

@@ -1,6 +1,6 @@
 import API from '../../utils/API';
 
-export default{
+export default {
   fetchTheMovie: movieId => async (dispatch) => {
     const response = await API.fetchMovieData(`/movie/${movieId}?`);
     dispatch({
