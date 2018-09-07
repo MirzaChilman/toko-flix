@@ -1,24 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
-const Wrapper = styled.section`
-  padding: 4em;
-  background: #0e0b16;
-  height: 100vh;
-  text-align: center;
-`;
-
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: white;
-  margin-top: 25vh;
-`;
+import { Link } from 'react-router-dom/Link';
+import './NotFound.css';
 
 const notFound = () => (
-  <Wrapper>
-    <Title>
+  <section className="notFound">
+    <div className="title">
       <p>Ooopss . . . We think you get lost, here let us help you</p>
       <p className="my-5">
         <Link
@@ -28,8 +14,8 @@ const notFound = () => (
           Click Me
         </Link>
       </p>
-    </Title>
-  </Wrapper>
+    </div>
+  </section>
 );
 
 export default notFound;

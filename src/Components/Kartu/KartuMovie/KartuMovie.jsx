@@ -2,27 +2,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './KartuMovie.css';
+import Utils from '../../../utils/Utils';
 
 const KartuMovie = props => {
   const { poster_path, id, vote_average, original_title, overview } = props;
-  let harga;
-  let styles = 'btn-danger';
-  let statusButton = 'Buy';
-
-  if (vote_average > 0 && vote_average <= 3) {
-    harga = 'Rp.' + vote_average * 3500;
-  } else if (vote_average > 3 && vote_average <= 6) {
-    harga = 'Rp.' + vote_average * 8250;
-  } else if (vote_average > 6 && vote_average <= 8) {
-    harga = 'Rp.' + vote_average * 16350;
-  } else if (vote_average > 8 && vote_average <= 10) {
-    harga = 'Rp.' + vote_average * 21250;
-  } else {
-    harga = 'Belum Tersedia';
-    styles = 'btn-secondary disabled';
-    statusButton = 'Sudah dipunyai';
-  }
-
+  const { calculatePrice } = Utils;
   return (
     <React.Fragment>
       <div className="content" key={id}>
@@ -35,7 +19,7 @@ const KartuMovie = props => {
         <div className="content-details fadeIn-bottom">
           <h3 className="content-title">{original_title}</h3>
           <p className="content-text">{`${vote_average} / 10`}</p>
-          <p className="content-text">{harga}</p>
+          <p className="content-text">{calculatePrice(vote_average).harga}</p>
           <Link
             to={`/movie/detail/${id}`}
             className="btn btn-outline-primary btn-block"
@@ -43,8 +27,8 @@ const KartuMovie = props => {
             Learn More
           </Link>
           <br />
-          <Link to="/" className={`btn ${styles} btn-block`} disabled>
-            {statusButton}
+          <Link to="/" className="btn btn-danger" disabled>
+            Buy
           </Link>
         </div>
       </div>

@@ -67,10 +67,11 @@ export default class Header extends React.Component {
                 </NavLink>
               </NavItem>
             </Nav>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
+            <Nav className="ml-auto text-default" navbar>
+              Account Credit : Rp. 100.000
+              {/* <NavItem>
                 <Search />
-              </NavItem>
+              </NavItem> */}
             </Nav>
           </Collapse>
         </Navbar>

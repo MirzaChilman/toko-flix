@@ -1,73 +1,50 @@
 import React, { Component } from 'react';
 import './MovieDetail.css';
-import axios from 'axios';
 import MovieRecommendation from '../MovieRecommendation/MovieRecommendation';
-// https://api.themoviedb.org/3/movie/299536?api_key=ae4dc1e91f4721e7f574d512da8263fd&language=en-US
+import { connect } from 'react-redux';
+import {
+  fetchMovieCast,
+  fetchMovieDetails,
+} from '../../../Redux/Actions/MovieActions';
+import MovieAlike from '../MovieAlike/MovieAlike';
+import Utils from '../../../utils/Utils';
+import Spinner from '../../Spinner/Spinner';
 class MovieDetail extends Component {
   state = {
-    movieData: [],
-    movieCast: [],
-    movieRecommendation: [],
-    movieAlike: [],
     isLoading: true,
-    API_KEY: 'ae4dc1e91f4721e7f574d512da8263fd',
   };
 
-  getMovieDetail = () => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${
-          this.props.match.params.movieId
-        }?api_key=${this.state.API_KEY}`
-      )
-      .then(response =>
-        this.setState({ movieData: response.data, isLoading: false })
-      );
-  };
+  // 76341
+  async componentDidMount() {
+    const { movieId } = this.props.match.params;
+    await this.props.fetchMovieDetails(movieId);
+    await this.props.fetchMovieCast(movieId);
 
-  getMovieCast = () => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${
-          this.props.match.params.movieId
-        }/credits?api_key=${this.state.API_KEY}`
-      )
-      .then(response =>
-        this.setState({ movieCast: response.data, isLoading: false })
-      );
-  };
-
-  getMovieReccomendation = () => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${
-          this.props.match.params.movieId
-        }/recommendations?api_key=${this.state.API_KEY}`
-      )
-      .then(response =>
-        this.setState({ movieRecommendation: response.data, isLoading: false })
-      );
-  };
-
-  componentWillMount() {
-    this.getMovieDetail();
-    this.getMovieCast();
-    this.getMovieReccomendation();
+    this.setState({
+      isLoading: false,
+    });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.match.params !== this.props.match.params) {
+      console.log('COMPONENT DID UPDATE');
+      this.componentDidMount();
+    }
+  }
   render() {
-    console.log(this.state.movieCast.cast);
-    console.log(this.state.movieRecommendation);
     const {
-      poster_path,
       original_title,
-      vote_average,
-      runtime,
-      release_date,
+      id,
+      poster_path,
       overview,
-    } = this.state.movieData;
+      vote_average,
+      release_date,
+      runtime,
+    } = this.props.movieDetails;
+    const { calculatePrice } = Utils;
     return (
       <React.Fragment>
+        <h1>data</h1>
         <section className="kontainer-grid">
           <section className="kontainer-item">
             <article className="kontainer-item__image">
@@ -79,20 +56,50 @@ class MovieDetail extends Component {
             <article className="kontainer-item__details">
               <h1 className="text-center">{original_title}</h1>
               <div className="d-flex justify-content-between">
-                <p className="lead">Rating : {vote_average} / 10</p>
-                <p className="lead">Release Date :{release_date}</p>
-                <p className="lead">{runtime} Hours</p>
+                <p className="lead">
+                  Rating :{' '}
+                  <span className="text-warning">{vote_average} / 10 </span>
+                </p>
+                <p className="lead">
+                  Release Date :{' '}
+                  <span className="text-warning">{release_date}</span>
+                </p>
+                <p className="lead">
+                  Runtime:
+                  <span className="text-warning">{runtime}</span> Hours
+                </p>
               </div>
               <hr />
+              <p>
+                Price :{' '}
+                <span className="text-success text-heavy">
+                  {calculatePrice(vote_average).harga}
+                </span>
+              </p>
               <p>{overview}.</p>
-              <div className="d-flex justify-content-between">
-                <p>Starring</p>
-                <p className="ml-3">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Non
-                  eius alias, mollitia voluptatum corrupti tenetur atque ea vel
-                  dolore. Dignissimos architecto rerum nisi, unde maxime
-                  molestias hic quaerat. Asperiores, cum?
-                </p>
+              <p className="text-danger">Starring</p>
+              <div className="kontainer-item__cast">
+                {!this.state.isLoading ? (
+                  this.props.movieCast
+                    .slice(0, 4)
+                    .map(({ character, name, profile_path, cast_id }) => {
+                      return (
+                        <figure key={cast_id}>
+                          <img
+                            className="cast-poster__image"
+                            src={`http://image.tmdb.org/t/p/w400/${profile_path}`}
+                            alt={profile_path}
+                          />
+                          <figcaption className="text-center">
+                            {name} <span className="text-warning"> as</span>{' '}
+                            {character}
+                          </figcaption>
+                        </figure>
+                      );
+                    })
+                ) : (
+                  <Spinner />
+                )}
               </div>
               <div className="d-flex justify-content-center">
                 <button className="btn btn-lg btn-primary">Buy</button>
@@ -100,10 +107,22 @@ class MovieDetail extends Component {
             </article>
           </section>
         </section>
-        <MovieRecommendation />
+        <MovieRecommendation movieId={this.props.match.params.movieId} />
+        <MovieAlike movieId={this.props.match.params.movieId} />
       </React.Fragment>
     );
   }
 }
 
-export default MovieDetail;
+const mapStateToProps = state => ({
+  movieDetails: state.movieDataDetails.movieDetails,
+  movieCast: state.movieDataDetails.movieCast,
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    fetchMovieDetails,
+    fetchMovieCast,
+  }
+)(MovieDetail);

@@ -13,7 +13,19 @@
   padding: 20px 20px;
 }
 
+.kontainer-item__cast {
+  display: grid;
+  background-color: #4d4d4d33;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 2fr));
+  grid-column-gap: 20px;
+}
+
 .kontainer-item__image {
   text-align: center;
   border: 0px solid yellow;
+}
+
+.cast-poster__image {
+  min-height: 250px;
+  max-height: 250px;
 }

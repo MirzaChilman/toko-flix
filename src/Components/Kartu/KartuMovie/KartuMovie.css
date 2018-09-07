@@ -1,14 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway);
-.main-title {
-  color: #2d2d2d;
-  text-align: center;
-  text-transform: capitalize;
-  padding: 0.7em 0; }
-
 .content {
   position: relative;
   width: 60%;
   min-width: 250px;
+  max-width: 250px;
+  margin: auto;
   overflow: hidden;
   padding: 0 5px; }
   .content .content-title {

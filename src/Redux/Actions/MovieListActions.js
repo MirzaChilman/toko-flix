@@ -6,7 +6,7 @@ import {
 import API from '../../utils/API';
 
 export const fetchIndonesia = () => async (dispatch) => {
-  const response = await API.fetchMovieData('/movie/now_playing?', '&language=en-US&page=1&region=ID');
+  const response = await API.fetchMovieData('/movie/now_playing?', '');
   dispatch({
     type: FETCH_MOVIE_INDONESIA,
     payload: response.data.results,
@@ -14,7 +14,7 @@ export const fetchIndonesia = () => async (dispatch) => {
 };
 
 export const fetchRecommendation = id => async (dispatch) => {
-  const response = await API.fetchMovieData('/movie/now_playing?', '&language=en-US&page=1&region=ID');
+  const response = await API.fetchMovieData(`/movie/${id}/recommendations?`, '&language=en-US&page=1');
   dispatch({
     type: FETCH_MOVIE_RECOMMENDATIONS,
     payload: response.data.results,
@@ -22,7 +22,7 @@ export const fetchRecommendation = id => async (dispatch) => {
 };
 
 export const fetchAlike = id => async (dispatch) => {
-  const response = await API.fetchMovieData('/movie/76341/similar?', '&language=en-US&page=1&region=ID');
+  const response = await API.fetchMovieData(`/movie/${id}/similar?`, '&language=en-US&page=1');
   dispatch({
     type: FETCH_MOVIE_ALIKE,
     payload: response.data.results,

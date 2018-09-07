@@ -1,0 +1,13 @@
+.notFound {
+  padding: 4em;
+  background: #0e0b16;
+  height: 100vh;
+  text-align: center;
+}
+
+.title {
+  font-size: 1.5em;
+  text-align: center;
+  color: white;
+  margin-top: 25vh;
+}

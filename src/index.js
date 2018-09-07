@@ -8,12 +8,16 @@ import App from './App.jsx';
 import registerServiceWorker from './registerServiceWorker';
 import {BrowserRouter as Router} from 'react-router-dom'
 import {Provider} from 'react-redux';
-import store from './Redux/store';
 
+import store from './Redux/store';
+import './index.css';
+import ScrollRestoration from './Components/ScrollRestoration/ScrollRestoration';
 ReactDOM.render(
     <Provider store={store}>
         <Router>
-            <App />
+            <ScrollRestoration>
+                <App />
+            </ScrollRestoration>
         </Router>
     </Provider>
 , document.getElementById('root'));

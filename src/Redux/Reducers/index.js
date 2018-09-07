@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import movieListReducers from './movieListReducers';
+import MovieListReducers from './MovieListReducers';
+import MovieActionReducers from './MovieActionReducers';
 
 export default combineReducers({
-  movieList: movieListReducers,
+  movieList: MovieListReducers,
+  movieDataDetails: MovieActionReducers,
 });
