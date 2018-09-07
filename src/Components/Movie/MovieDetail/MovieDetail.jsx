@@ -9,6 +9,8 @@ import {
 import MovieAlike from '../MovieAlike/MovieAlike';
 import Utils from '../../../utils/Utils';
 import Spinner from '../../Spinner/Spinner';
+import LazyLoad from 'react-lazyload';
+
 class MovieDetail extends Component {
   state = {
     isLoading: true,
@@ -44,29 +46,29 @@ class MovieDetail extends Component {
     const { calculatePrice } = Utils;
     return (
       <React.Fragment>
-        <h1>data</h1>
         <section className="kontainer-grid">
-          <section className="kontainer-item">
+          <section className="kontainer-item" key={id}>
             <article className="kontainer-item__image">
-              <img
-                src={`http://image.tmdb.org/t/p/w500${poster_path}`}
-                alt=""
-              />
+              <LazyLoad height={'100%'} resize={true} offset={100}>
+                <img
+                  src={`http://image.tmdb.org/t/p/w500${poster_path}`}
+                  alt=""
+                />
+              </LazyLoad>
             </article>
             <article className="kontainer-item__details">
               <h1 className="text-center">{original_title}</h1>
               <div className="d-flex justify-content-between">
                 <p className="lead">
-                  Rating :{' '}
+                  Rating:{' '}
                   <span className="text-warning">{vote_average} / 10 </span>
                 </p>
                 <p className="lead">
-                  Release Date :{' '}
+                  Release Date:{' '}
                   <span className="text-warning">{release_date}</span>
                 </p>
                 <p className="lead">
-                  Runtime:
-                  <span className="text-warning">{runtime}</span> Hours
+                  Runtime: <span className="text-warning">{runtime}</span> Hours
                 </p>
               </div>
               <hr />
@@ -78,22 +80,24 @@ class MovieDetail extends Component {
               </p>
               <p>{overview}.</p>
               <p className="text-danger">Starring</p>
-              <div className="kontainer-item__cast">
+              <div className="kontainer-item__cast text-center">
                 {!this.state.isLoading ? (
                   this.props.movieCast
                     .slice(0, 4)
                     .map(({ character, name, profile_path, cast_id }) => {
                       return (
                         <figure key={cast_id}>
-                          <img
-                            className="cast-poster__image"
-                            src={`http://image.tmdb.org/t/p/w400/${profile_path}`}
-                            alt={profile_path}
-                          />
-                          <figcaption className="text-center">
-                            {name} <span className="text-warning"> as</span>{' '}
-                            {character}
-                          </figcaption>
+                          <LazyLoad height={'100%'} resize={true} offset={100}>
+                            <img
+                              className="cast-poster__image"
+                              src={`http://image.tmdb.org/t/p/w400/${profile_path}`}
+                              alt={name}
+                            />
+                            <figcaption className="text-center">
+                              {name} <span className="text-warning"> as</span>{' '}
+                              {character}
+                            </figcaption>
+                          </LazyLoad>
                         </figure>
                       );
                     })
@@ -108,6 +112,7 @@ class MovieDetail extends Component {
           </section>
         </section>
         <MovieRecommendation movieId={this.props.match.params.movieId} />
+        <hr />
         <MovieAlike movieId={this.props.match.params.movieId} />
       </React.Fragment>
     );
