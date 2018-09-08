@@ -29,14 +29,3 @@ export const fetchAlike = id => async (dispatch) => {
     payload: response.data.results,
   });
 };
-
-export const fetchMovieSearch = searchQuery => async (dispatch) => {
-  const response = await API.fetchMovieData(
-    '/search/movie?',
-    `&query=${searchQuery}`,
-  );
-  dispatch({
-    type: FETCH_MOVIE_SEARCH,
-    payload: response,
-  });
-};

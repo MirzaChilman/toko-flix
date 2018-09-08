@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Utils from '../../../utils/Utils';
+import { calculatePrice, titleToSlug } from '../../../utils/Utils';
 import { dispatchAccountCredit } from '../../../Redux/Actions/AccountActions';
 import './KartuMovie.css';
 
@@ -36,7 +36,21 @@ class KartuMovie extends Component {
   // check if the movie can be bought
   afforadbleHandler = () => {
     const credit = JSON.parse(localStorage.getItem('storageCredit'));
-    const price = Utils.calculatePrice(this.props.vote_average);
+    const price = calculatePrice(this.props.vote_average);
+    const movie = JSON.parse(localStorage.getItem('storageMovie'));
+    const { id } = this.props;
+    if (credit < price && !movie.includes(id)) {
+      this.setState({
+        buttonStatus: 'Buy more Credit',
+        buttonStyle: 'btn-secondary',
+        buttonAttr: true,
+      });
+    }
+  };
+
+  afforadbleHandler = () => {
+    const credit = JSON.parse(localStorage.getItem('storageCredit'));
+    const price = calculatePrice(this.props.vote_average);
     const movie = JSON.parse(localStorage.getItem('storageMovie'));
     const { id } = this.props;
     if (credit < price && !movie.includes(id)) {
@@ -67,7 +81,6 @@ class KartuMovie extends Component {
       overview,
     } = this.props;
     const { buttonStatus, buttonStyle, buttonAttr } = this.state;
-    const { calculatePrice, titleToSlug } = Utils;
     const price = calculatePrice(vote_average);
 
     return (

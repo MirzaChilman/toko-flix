@@ -16,9 +16,7 @@ class LandingPage extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { isLoading } = this.state;
-    /* const { total_results, total_pages } = this.props.pageData; */
     return (
       <React.Fragment>
         <Kartu {...this.props} isLoading={isLoading} />

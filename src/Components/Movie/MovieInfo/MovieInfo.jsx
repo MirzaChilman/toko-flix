@@ -6,7 +6,7 @@ import {
   fetchMovieCast,
   fetchMovieDetails,
 } from '../../../Redux/Actions/MovieActions';
-import Utils from '../../../utils/Utils';
+import { calculatePrice, afforadbleHandler } from '../../../utils/Utils';
 import Spinner from '../../Spinner/Spinner';
 import './MovieInfo.css';
 import { dispatchAccountCredit } from '../../../Redux/Actions/AccountActions';
@@ -51,15 +51,13 @@ class MovieDetail extends Component {
     }
   }
 
-  // check if the movie can be bought
   afforadbleHandler = () => {
-    const { vote_average, id } = this.props.movieDetails;
-    console.log(id);
     const credit = JSON.parse(localStorage.getItem('storageCredit'));
-    const price = Utils.calculatePrice(vote_average);
+    const price = calculatePrice(this.props.vote_average);
     const movie = JSON.parse(localStorage.getItem('storageMovie'));
-
-    if (credit < price && !movie.includes(id)) {
+    const { id } = this.props.movieDetails;
+    console.log(id);
+    if (credit < price || !movie.includes(id)) {
       this.setState({
         buttonStatus: 'Buy more Credit',
         buttonStyle: 'btn-secondary',
@@ -89,7 +87,6 @@ class MovieDetail extends Component {
       runtime,
     } = this.props.movieDetails;
     const { buttonStatus, buttonStyle, buttonAttr } = this.state;
-    const { calculatePrice } = Utils;
     const price = calculatePrice(vote_average);
     return (
       <React.Fragment>

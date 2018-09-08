@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './search.css';
 import searchIcon from '../../../assets/search-icon.png';
+import './search.css';
 
 class Search extends Component {
   state = {
     search: '',
   };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({
       search: e.target.value,
     });
   };
+
   render() {
     const { search } = this.state;
     return (
@@ -25,12 +26,12 @@ class Search extends Component {
           onChange={this.handleChange}
         />
 
-        <Link to="/search" onClick={this.handleClick}>
+        <Link to={`/${search}`} onClick={this.handleClick}>
           <img className="search-icon" src={searchIcon} alt={searchIcon} />
         </Link>
       </React.Fragment>
     );
   }
 }
-
+let _;
 export default Search;

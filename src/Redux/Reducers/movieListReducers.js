@@ -2,12 +2,14 @@ import {
   FETCH_MOVIE_INDONESIA,
   FETCH_MOVIE_RECOMMENDATIONS,
   FETCH_MOVIE_ALIKE,
+  FETCH_MOVIE_SEARCH,
 } from '../Actions/actionCreators';
 
 const initialState = {
   movieIndonesia: [],
   movieRecommendations: [],
   movieAlike: [],
+  movieSearch: [],
 };
 
 export default function (state = initialState, action) {
@@ -26,6 +28,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         movieAlike: action.payload,
+      };
+    case FETCH_MOVIE_SEARCH:
+      return {
+        ...state,
+        movieSearch: action.payload,
       };
     default:
       return state;
