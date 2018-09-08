@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
-import Wrapper from '../../Kartu/Wrapper/Wrapper';
+import { connect } from 'react-redux';
+import Wrapper from '../../Wrapper/Wrapper';
 import Spinner from '../../Spinner/Spinner';
 import KartuMovie from '../../Kartu/KartuMovie/KartuMovie';
-import { connect } from 'react-redux';
 import { fetchAlike } from '../../../Redux/Actions/MovieListActions';
 
 class MovieAlike extends Component {
@@ -12,8 +12,8 @@ class MovieAlike extends Component {
   };
 
   async componentDidMount() {
-    const { movieId } = this.props;
-    await this.props.fetchAlike(movieId);
+    const { match } = this.props;
+    await this.props.fetchAlike(match.params.movieId);
     this.setState({
       isLoading: false,
     });
@@ -27,17 +27,20 @@ class MovieAlike extends Component {
       this.componentDidMount();
     }
   }
+
   render() {
+    const { isLoading } = this.state;
+    const { movieAlike } = this.props;
     return (
       <Container fluid>
         <h1 className="text-danger">Movie Similar</h1>
         <Wrapper>
-          {this.state.isLoading ? (
+          {isLoading ? (
             <Spinner />
           ) : (
-            this.props.movieAlike.slice(0, 4).map(datum => {
-              return <KartuMovie key={datum.id} {...datum} />;
-            })
+            movieAlike
+              .slice(0, 4)
+              .map(datum => <KartuMovie key={datum.id} {...datum} />)
           )}
         </Wrapper>
       </Container>
@@ -51,5 +54,5 @@ export default connect(
   mapStateToProps,
   {
     fetchAlike,
-  }
+  },
 )(MovieAlike);

@@ -31,6 +31,7 @@ class Header extends React.Component {
   }
 
   async componentDidMount() {
+    // eslint-disable-next-line
     await this.props.requestAccountCredit();
   }
 
@@ -75,10 +76,10 @@ class Header extends React.Component {
               </NavItem>
             </Nav>
             <Nav className="ml-auto text-default" navbar>
-              {`Account Credit : ${accountCredit}`}
-              {/* <NavItem>
-                <Search />
-              </NavItem> */}
+              <NavItem className="mx-5">
+                {`Account Credit : ${accountCredit}`}
+                <Search className="form__search" />
+              </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
@@ -101,6 +102,13 @@ Navbar.propTypes = {
 NavbarBrand.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   // pass in custom element to use
+};
+Header.defaultProps = {
+  accountCredit: 100000,
+};
+
+Header.propTypes = {
+  accountCredit: PropTypes.number,
 };
 
 const mapStateToProps = state => ({

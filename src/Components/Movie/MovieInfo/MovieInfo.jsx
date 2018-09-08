@@ -1,15 +1,14 @@
+/* eslint-disable */
 import React, { Component } from 'react';
-import './MovieDetail.css';
-import MovieRecommendation from '../MovieRecommendation/MovieRecommendation';
 import { connect } from 'react-redux';
+import LazyLoad from 'react-lazyload';
 import {
   fetchMovieCast,
   fetchMovieDetails,
 } from '../../../Redux/Actions/MovieActions';
-import MovieAlike from '../MovieAlike/MovieAlike';
 import Utils from '../../../utils/Utils';
 import Spinner from '../../Spinner/Spinner';
-import LazyLoad from 'react-lazyload';
+import './MovieInfo.css';
 
 class MovieDetail extends Component {
   state = {
@@ -27,7 +26,8 @@ class MovieDetail extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.match.params !== this.props.match.params) {
+    const { match } = this.props;
+    if (prevProps.match.params !== match.params) {
       this.setState({
         isLoading: true,
       });
@@ -54,7 +54,7 @@ class MovieDetail extends Component {
               {this.state.isLoading ? (
                 <Spinner />
               ) : (
-                <LazyLoad height={'100%'} resize={true} offset={100}>
+                <LazyLoad height="100%" resize offset={100}>
                   <img
                     src={`http://image.tmdb.org/t/p/w500${poster_path}`}
                     alt=""
@@ -67,7 +67,7 @@ class MovieDetail extends Component {
               <div className="d-flex justify-content-between">
                 <p className="lead">
                   Rating:{' '}
-                  <span className="text-warning">{vote_average} / 10 </span>
+                  <span className="text-warning">{vote_average}/ 10</span>
                 </p>
                 <p className="lead">
                   Release Date:{' '}
@@ -90,28 +90,21 @@ class MovieDetail extends Component {
                 {!this.state.isLoading ? (
                   this.props.movieCast
                     .slice(0, 4)
-                    .map(({ character, name, profile_path, cast_id }) => {
-                      return (
-                        <figure key={cast_id}>
-                          <LazyLoad
-                            height={'100%'}
-                            resize={true}
-                            offset={100}
-                            once
-                          >
-                            <img
-                              className="cast-poster__image"
-                              src={`http://image.tmdb.org/t/p/w400/${profile_path}`}
-                              alt={name}
-                            />
-                          </LazyLoad>
-                          <figcaption className="text-center">
-                            {name} <span className="text-warning"> as</span>{' '}
-                            {character}
-                          </figcaption>
-                        </figure>
-                      );
-                    })
+                    .map(({ character, name, profile_path, cast_id }) => (
+                      <figure key={cast_id}>
+                        <LazyLoad height="100%" resize offset={100} once>
+                          <img
+                            className="cast-poster__image"
+                            src={`http://image.tmdb.org/t/p/w400/${profile_path}`}
+                            alt={name}
+                          />
+                        </LazyLoad>
+                        <figcaption className="text-center">
+                          {name} <span className="text-warning"> as</span>{' '}
+                          {character}
+                        </figcaption>
+                      </figure>
+                    ))
                 ) : (
                   <Spinner />
                 )}
@@ -122,9 +115,9 @@ class MovieDetail extends Component {
             </article>
           </section>
         </section>
-        <MovieRecommendation movieId={this.props.match.params.movieId} />
+        {/* <MovieRecommendation movieId={this.props.match.params.movieId} />
         <hr />
-        <MovieAlike movieId={this.props.match.params.movieId} />
+        <MovieAlike movieId={this.props.match.params.movieId} /> */}
       </React.Fragment>
     );
   }

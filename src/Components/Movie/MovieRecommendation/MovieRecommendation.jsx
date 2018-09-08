@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
-import Wrapper from '../../Kartu/Wrapper/Wrapper';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import Wrapper from '../../Wrapper/Wrapper';
 import Spinner from '../../Spinner/Spinner';
 import KartuMovie from '../../Kartu/KartuMovie/KartuMovie';
-import { connect } from 'react-redux';
 import { fetchRecommendation } from '../../../Redux/Actions/MovieListActions';
 
 class MovieRecommendation extends Component {
@@ -12,15 +13,18 @@ class MovieRecommendation extends Component {
   };
 
   async componentDidMount() {
-    const { movieId } = this.props;
-    await this.props.fetchRecommendation(movieId);
+    const { match } = this.props;
+    const { fetchRecommendation } = this.props;
+    await fetchRecommendation(match.params.movieId);
     this.setState({
       isLoading: false,
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.movieId !== this.props.movieId) {
+  componentDidUpdate(prevProps) {
+    const { match } = this.props;
+    if (prevProps.match !== match) {
+      // eslint-disable-react/no-did-update-set-state
       this.setState({
         isLoading: true,
       });
@@ -29,22 +33,29 @@ class MovieRecommendation extends Component {
   }
 
   render() {
+    const { isLoading } = this.state;
+    const { movieRecommendations } = this.props;
     return (
       <Container fluid>
         <h1 className="text-danger">Movie recomendation</h1>
         <Wrapper>
-          {this.state.isLoading ? (
+          {isLoading ? (
             <Spinner />
           ) : (
-            this.props.movieRecommendations.slice(0, 4).map(datum => {
-              return <KartuMovie key={datum.id} {...datum} />;
-            })
+            movieRecommendations
+              .slice(0, 4)
+              .map(datum => <KartuMovie key={datum.id} {...datum} />)
           )}
         </Wrapper>
       </Container>
     );
   }
 }
+
+MovieRecommendation.propTypes = {
+  fetchRecommendation: PropTypes.func.isRequired,
+};
+
 const mapStateToProps = state => ({
   movieRecommendations: state.movieList.movieRecommendations,
 });
@@ -52,5 +63,5 @@ export default connect(
   mapStateToProps,
   {
     fetchRecommendation,
-  }
+  },
 )(MovieRecommendation);

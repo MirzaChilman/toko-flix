@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Kartu from '../Kartu/Kartu';
+import { fetchIndonesia } from '../../Redux/Actions/MovieListActions';
 
-const landingPage = () => (
-  <React.Fragment>
-    <Kartu />
-  </React.Fragment>
-);
+class LandingPage extends Component {
+  state = {
+    isLoading: true,
+  };
 
-export default landingPage;
+  async componentDidMount() {
+    await this.props.fetchIndonesia();
+    this.setState({ isLoading: false });
+  }
+
+  render() {
+    const { isLoading } = this.state;
+    return (
+      <React.Fragment>
+        <Kartu {...this.props} isLoading={isLoading} />
+      </React.Fragment>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  movieIndonesia: state.movieList.movieIndonesia,
+});
+
+export default connect(
+  mapStateToProps,
+  { fetchIndonesia },
+)(LandingPage);

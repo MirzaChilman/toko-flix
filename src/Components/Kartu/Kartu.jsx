@@ -1,41 +1,38 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import KartuMovie from './KartuMovie/KartuMovie';
-import Wrapper from './Wrapper/Wrapper';
+import Wrapper from '../Wrapper/Wrapper';
 import Spinner from '../Spinner/Spinner';
-import { connect } from 'react-redux';
-import { fetchIndonesia } from '../../Redux/Actions/MovieListActions';
-class Kartu extends Component {
-  state = {
-    isLoading: true,
-  };
 
-  async componentDidMount() {
-    await this.props.fetchIndonesia();
-    this.setState({ isLoading: false });
-  }
+const Kartu = (props) => {
+  console.log(props);
+  const { movieIndonesia, isLoading } = props;
 
-  render() {
-    return (
-      <React.Fragment>
-        <p className="mt-5 text-danger">Now Playing in Indonesia</p>
-        <Wrapper>
-          {this.state.isLoading ? (
-            <Spinner />
-          ) : (
-            this.props.movieIndonesia.map(datum => {
-              return <KartuMovie key={datum.id} {...datum} />;
-            })
-          )}
-        </Wrapper>
-      </React.Fragment>
-    );
-  }
-}
-const mapStateToProps = state => ({
-  movieIndonesia: state.movieList.movieIndonesia,
-});
+  return (
+    <React.Fragment>
+      <p className="mt-5 text-danger">Now Playing in Indonesia</p>
+      <Wrapper>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          movieIndonesia.map(datum => <KartuMovie key={datum.id} {...datum} />)
+        )}
+      </Wrapper>
+    </React.Fragment>
+  );
+};
 
-export default connect(
-  mapStateToProps,
-  { fetchIndonesia }
-)(Kartu);
+Kartu.propTypes = {
+  movieIndonesia: PropTypes.arrayOf(
+    PropTypes.shape({
+      adult: PropTypes.bool.isRequired,
+      original_title: PropTypes.string.isRequired,
+      vote_average: PropTypes.number.isRequired,
+      release_date: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      poster_path: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+};
+export default Kartu;
