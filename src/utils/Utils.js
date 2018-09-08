@@ -26,4 +26,17 @@ export default {
       console.log('hALO');
     }
   },
+  afforadbleHandler: (vote, id) => {
+    const credit = JSON.parse(localStorage.getItem('storageCredit'));
+    const price = this.calculatePrice(vote);
+    const movie = JSON.parse(localStorage.getItem('storageMovie'));
+    /*     const { id } = this.props; */
+    if (credit < price && !movie.includes(id)) {
+      this.setState({
+        buttonStatus: 'Buy more Credit',
+        buttonStyle: 'btn-secondary',
+        buttonAttr: true,
+      });
+    }
+  },
 };

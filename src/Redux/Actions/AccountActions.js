@@ -4,7 +4,6 @@ import {
   REQUEST_ACCOUNT_CREDIT,
   DISPATCH_ACCOUNT_CREDIT,
 } from './actionCreators';
-import API from '../../utils/API';
 
 export const requestAccountCredit = () => async (dispatch) => {
   if (localStorage.getItem('storageCredit') === null) {

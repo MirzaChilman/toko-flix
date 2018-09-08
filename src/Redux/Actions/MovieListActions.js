@@ -5,11 +5,11 @@ import {
 } from './actionCreators';
 import API from '../../utils/API';
 
-export const fetchIndonesia = () => async (dispatch) => {
-  const response = await API.fetchMovieData('/movie/now_playing?', '');
+export const fetchNowPlaying = id => async (dispatch) => {
+  const response = await API.fetchMovieData('/movie/now_playing?', `${id ? `&page=${id}` : ''}`);
   dispatch({
     type: FETCH_MOVIE_INDONESIA,
-    payload: response.data.results,
+    payload: response.data,
   });
 };
 

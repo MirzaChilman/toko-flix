@@ -7,10 +7,6 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -53,24 +49,13 @@ class Header extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
-              <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Browse
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>Lorem</DropdownItem>
-                  <DropdownItem>Ipsum</DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>Dolor</DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
               <NavItem>
                 <NavLink href="/components/" className="text-danger">
                   Movie
                 </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">
+                <NavLink href="https://www.linkedin.com/in/mirza-garin/">
                   About
                 </NavLink>
               </NavItem>

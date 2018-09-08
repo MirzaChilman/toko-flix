@@ -9,17 +9,33 @@ import {
 import Utils from '../../../utils/Utils';
 import Spinner from '../../Spinner/Spinner';
 import './MovieInfo.css';
-
+import { dispatchAccountCredit } from '../../../Redux/Actions/AccountActions';
 class MovieDetail extends Component {
   state = {
     isLoading: true,
+    buttonStatus: 'buy',
+    buttonStyle: 'btn-danger',
+    buttonAttr: false,
   };
 
   async componentDidMount() {
-    const { movieId } = this.props.match.params;
-    await this.props.fetchMovieDetails(movieId);
-    await this.props.fetchMovieCast(movieId);
+    const { match, movieDetails } = this.props;
+    const movie = JSON.parse(localStorage.getItem('storageMovie'));
 
+    await this.props.fetchMovieDetails(match.params.movieId);
+    await this.props.fetchMovieCast(match.params.movieId);
+    console.log(this.props.movieDetails.id);
+    if (movie) {
+      // if exist then change button
+      if (movie.includes(this.props.movieDetails.id)) {
+        this.setState({
+          buttonStatus: 'Owned',
+          buttonStyle: 'btn-success',
+          buttonAttr: true,
+        });
+      }
+    }
+    this.afforadbleHandler();
     this.setState({
       isLoading: false,
     });
@@ -35,6 +51,33 @@ class MovieDetail extends Component {
     }
   }
 
+  // check if the movie can be bought
+  afforadbleHandler = () => {
+    const { vote_average, id } = this.props.movieDetails;
+    console.log(id);
+    const credit = JSON.parse(localStorage.getItem('storageCredit'));
+    const price = Utils.calculatePrice(vote_average);
+    const movie = JSON.parse(localStorage.getItem('storageMovie'));
+
+    if (credit < price && !movie.includes(id)) {
+      this.setState({
+        buttonStatus: 'Buy more Credit',
+        buttonStyle: 'btn-secondary',
+        buttonAttr: true,
+      });
+    }
+  };
+
+  // invoke 2 function onClick event
+  combineClickedEvent = (id, price) => {
+    console.log('ke Click');
+    // change the movie store in redux
+    const { buyMovie } = this.props;
+    buyMovie(id, price);
+    // call componentDidMount
+    this.componentDidMount();
+  };
+
   render() {
     const {
       original_title,
@@ -45,7 +88,9 @@ class MovieDetail extends Component {
       release_date,
       runtime,
     } = this.props.movieDetails;
+    const { buttonStatus, buttonStyle, buttonAttr } = this.state;
     const { calculatePrice } = Utils;
+    const price = calculatePrice(vote_average);
     return (
       <React.Fragment>
         <section className="kontainer-grid">
@@ -78,18 +123,18 @@ class MovieDetail extends Component {
                 </p>
               </div>
               <hr />
-              <p>
+              <h3>
                 Price :{' '}
                 <span className="text-success text-heavy">
-                  {calculatePrice(vote_average).harga}
+                  {`Rp.${calculatePrice(vote_average)}`}
                 </span>
-              </p>
+              </h3>
               <p>{overview}.</p>
               <p className="text-danger">Starring</p>
               <div className="kontainer-item__cast text-center">
                 {!this.state.isLoading ? (
                   this.props.movieCast
-                    .slice(0, 4)
+                    .slice(0, 3)
                     .map(({ character, name, profile_path, cast_id }) => (
                       <figure key={cast_id}>
                         <LazyLoad height="100%" resize offset={100} once>
@@ -110,14 +155,17 @@ class MovieDetail extends Component {
                 )}
               </div>
               <div className="d-flex justify-content-center">
-                <button className="btn btn-lg btn-primary">Buy</button>
+                <button
+                  className={`btn ${buttonStyle} btn-block`}
+                  onClick={() => this.combineClickedEvent(id, price)}
+                  disabled={buttonAttr}
+                >
+                  {buttonStatus}
+                </button>
               </div>
             </article>
           </section>
         </section>
-        {/* <MovieRecommendation movieId={this.props.match.params.movieId} />
-        <hr />
-        <MovieAlike movieId={this.props.match.params.movieId} /> */}
       </React.Fragment>
     );
   }
@@ -133,5 +181,6 @@ export default connect(
   {
     fetchMovieDetails,
     fetchMovieCast,
+    buyMovie: dispatchAccountCredit,
   }
 )(MovieDetail);

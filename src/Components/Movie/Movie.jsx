@@ -4,16 +4,13 @@ import MovieInfo from './MovieInfo/MovieInfo';
 import MovieRecommendation from './MovieRecommendation/MovieRecommendation';
 import MovieAlike from './MovieAlike/MovieAlike';
 
-const Movie = ({ match }) => {
-  console.log(match);
-  return (
+const Movie = ({ match }) => (
     <React.Fragment>
       <MovieInfo match={match} />
       <MovieRecommendation match={match} />
       <MovieAlike match={match} />
     </React.Fragment>
   );
-};
 
 Movie.propTypes = {
   match: PropTypes.shape({

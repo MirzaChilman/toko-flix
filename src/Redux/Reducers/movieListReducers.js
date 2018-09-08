@@ -8,6 +8,7 @@ const initialState = {
   movieIndonesia: [],
   movieRecommendations: [],
   movieAlike: [],
+  pageData: '',
 };
 
 export default function (state = initialState, action) {
@@ -15,7 +16,7 @@ export default function (state = initialState, action) {
     case FETCH_MOVIE_INDONESIA:
       return {
         ...state,
-        movieIndonesia: action.payload,
+        movieIndonesia: action.payload.results,
       };
     case FETCH_MOVIE_RECOMMENDATIONS:
       return {

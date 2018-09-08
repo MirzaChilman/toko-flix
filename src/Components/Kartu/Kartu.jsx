@@ -5,7 +5,6 @@ import Wrapper from '../Wrapper/Wrapper';
 import Spinner from '../Spinner/Spinner';
 
 const Kartu = (props) => {
-  console.log(props);
   const { movieIndonesia, isLoading } = props;
 
   return (
@@ -30,7 +29,7 @@ Kartu.propTypes = {
       vote_average: PropTypes.number.isRequired,
       release_date: PropTypes.string.isRequired,
       id: PropTypes.number.isRequired,
-      poster_path: PropTypes.string.isRequired,
+      poster_path: PropTypes.string,
     }),
   ).isRequired,
   isLoading: PropTypes.bool.isRequired,

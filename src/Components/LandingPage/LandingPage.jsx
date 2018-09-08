@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Kartu from '../Kartu/Kartu';
-import { fetchIndonesia } from '../../Redux/Actions/MovieListActions';
+import { fetchNowPlaying } from '../../Redux/Actions/MovieListActions';
+import Pagenation from '../Pagenation/Pagenation';
 
 class LandingPage extends Component {
   state = {
@@ -9,15 +10,19 @@ class LandingPage extends Component {
   };
 
   async componentDidMount() {
-    await this.props.fetchIndonesia();
+    const { pageId } = this.props.match.params;
+    await this.props.fetchNowPlaying(pageId);
     this.setState({ isLoading: false });
   }
 
   render() {
+    console.log(this.props);
     const { isLoading } = this.state;
+    /* const { total_results, total_pages } = this.props.pageData; */
     return (
       <React.Fragment>
         <Kartu {...this.props} isLoading={isLoading} />
+        <Pagenation match={this.props.match} />
       </React.Fragment>
     );
   }
@@ -25,9 +30,10 @@ class LandingPage extends Component {
 
 const mapStateToProps = state => ({
   movieIndonesia: state.movieList.movieIndonesia,
+  pageData: state.movieList.pageData,
 });
 
 export default connect(
   mapStateToProps,
-  { fetchIndonesia },
+  { fetchNowPlaying },
 )(LandingPage);

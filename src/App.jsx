@@ -31,9 +31,18 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={() => (
+            render={({ match }) => (
               <React.Fragment>
-                <LandingPage />
+                <LandingPage match={match} />
+              </React.Fragment>
+            )}
+          />
+          <Route
+            exact
+            path="/page/:pageId"
+            render={({ match }) => (
+              <React.Fragment>
+                <LandingPage match={match} />
               </React.Fragment>
             )}
           />
