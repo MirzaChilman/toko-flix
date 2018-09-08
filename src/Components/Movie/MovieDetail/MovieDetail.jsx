@@ -16,7 +16,6 @@ class MovieDetail extends Component {
     isLoading: true,
   };
 
-  // 76341
   async componentDidMount() {
     const { movieId } = this.props.match.params;
     await this.props.fetchMovieDetails(movieId);
@@ -29,10 +28,13 @@ class MovieDetail extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.match.params !== this.props.match.params) {
-      console.log('COMPONENT DID UPDATE');
+      this.setState({
+        isLoading: true,
+      });
       this.componentDidMount();
     }
   }
+
   render() {
     const {
       original_title,
@@ -49,12 +51,16 @@ class MovieDetail extends Component {
         <section className="kontainer-grid">
           <section className="kontainer-item" key={id}>
             <article className="kontainer-item__image">
-              <LazyLoad height={'100%'} resize={true} offset={100}>
-                <img
-                  src={`http://image.tmdb.org/t/p/w500${poster_path}`}
-                  alt=""
-                />
-              </LazyLoad>
+              {this.state.isLoading ? (
+                <Spinner />
+              ) : (
+                <LazyLoad height={'100%'} resize={true} offset={100}>
+                  <img
+                    src={`http://image.tmdb.org/t/p/w500${poster_path}`}
+                    alt=""
+                  />
+                </LazyLoad>
+              )}
             </article>
             <article className="kontainer-item__details">
               <h1 className="text-center">{original_title}</h1>
@@ -87,17 +93,22 @@ class MovieDetail extends Component {
                     .map(({ character, name, profile_path, cast_id }) => {
                       return (
                         <figure key={cast_id}>
-                          <LazyLoad height={'100%'} resize={true} offset={100}>
+                          <LazyLoad
+                            height={'100%'}
+                            resize={true}
+                            offset={100}
+                            once
+                          >
                             <img
                               className="cast-poster__image"
                               src={`http://image.tmdb.org/t/p/w400/${profile_path}`}
                               alt={name}
                             />
-                            <figcaption className="text-center">
-                              {name} <span className="text-warning"> as</span>{' '}
-                              {character}
-                            </figcaption>
                           </LazyLoad>
+                          <figcaption className="text-center">
+                            {name} <span className="text-warning"> as</span>{' '}
+                            {character}
+                          </figcaption>
                         </figure>
                       );
                     })

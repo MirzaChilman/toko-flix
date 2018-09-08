@@ -21,7 +21,9 @@ class MovieAlike extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.movieId !== this.props.movieId) {
-      console.log('COMPONENT DID UPDATE');
+      this.setState({
+        isLoading: true,
+      });
       this.componentDidMount();
     }
   }

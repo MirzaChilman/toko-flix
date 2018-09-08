@@ -13,12 +13,14 @@ import {
   DropdownItem,
 } from 'reactstrap';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import NetflixLogo from '../../assets/Netflix-logo.png';
+import { requestAccountCredit } from '../../Redux/Actions/AccountActions';
 import Search from './Search/Search';
 
 import './header.css';
 
-export default class Header extends React.Component {
+class Header extends React.Component {
   constructor(props) {
     super(props);
 
@@ -26,6 +28,10 @@ export default class Header extends React.Component {
     this.state = {
       isOpen: false,
     };
+  }
+
+  async componentDidMount() {
+    await this.props.requestAccountCredit();
   }
 
   toggle() {
@@ -36,6 +42,7 @@ export default class Header extends React.Component {
 
   render() {
     const { isOpen } = this.state;
+    const { accountCredit } = this.props;
     return (
       <div>
         <Navbar color="dark" dark expand="md">
@@ -68,7 +75,7 @@ export default class Header extends React.Component {
               </NavItem>
             </Nav>
             <Nav className="ml-auto text-default" navbar>
-              Account Credit : Rp. 100.000
+              {`Account Credit : ${accountCredit}`}
               {/* <NavItem>
                 <Search />
               </NavItem> */}
@@ -95,3 +102,14 @@ NavbarBrand.propTypes = {
   tag: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
   // pass in custom element to use
 };
+
+const mapStateToProps = state => ({
+  accountCredit: state.accountInfo.accountCredit,
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    requestAccountCredit,
+  },
+)(Header);

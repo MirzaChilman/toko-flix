@@ -3,9 +3,24 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Header from './Components/Partials/Header';
 import Footer from './Components/Partials/Footer';
-import NotFound from './Components/NotFound/NotFound';
-import LandingPage from './Components/LandingPage/LandingPage';
-import Movie from './Components/Movie/Movie';
+import Loadable from 'react-loadable';
+import Spinner from './Components/Spinner/Spinner';
+
+const NotFound = Loadable({
+  //eslint-disable-next-line
+  loader: () => import('./Components/NotFound/NotFound'),
+  loading: Spinner,
+});
+
+const LandingPage = Loadable({
+  loader: () => import('./Components/LandingPage/LandingPage'),
+  loading: Spinner,
+});
+
+const Movie = Loadable({
+  loader: () => import('./Components/Movie/Movie'),
+  loading: Spinner,
+});
 
 class App extends Component {
   render() {

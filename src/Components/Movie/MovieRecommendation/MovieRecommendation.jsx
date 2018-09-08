@@ -14,7 +14,6 @@ class MovieRecommendation extends Component {
   async componentDidMount() {
     const { movieId } = this.props;
     await this.props.fetchRecommendation(movieId);
-    console.log(this.props);
     this.setState({
       isLoading: false,
     });
@@ -22,7 +21,9 @@ class MovieRecommendation extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.movieId !== this.props.movieId) {
-      console.log('COMPONENT DID UPDATE');
+      this.setState({
+        isLoading: true,
+      });
       this.componentDidMount();
     }
   }
