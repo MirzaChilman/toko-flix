@@ -8,7 +8,6 @@ const initialState = {
   movieIndonesia: [],
   movieRecommendations: [],
   movieAlike: [],
-  pageData: '',
 };
 
 export default function (state = initialState, action) {

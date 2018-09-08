@@ -2,6 +2,7 @@ import {
   FETCH_MOVIE_INDONESIA,
   FETCH_MOVIE_RECOMMENDATIONS,
   FETCH_MOVIE_ALIKE,
+  FETCH_MOVIE_SEARCH,
 } from './actionCreators';
 import API from '../../utils/API';
 
@@ -26,5 +27,16 @@ export const fetchAlike = id => async (dispatch) => {
   dispatch({
     type: FETCH_MOVIE_ALIKE,
     payload: response.data.results,
+  });
+};
+
+export const fetchMovieSearch = searchQuery => async (dispatch) => {
+  const response = await API.fetchMovieData(
+    '/search/movie?',
+    `&query=${searchQuery}`,
+  );
+  dispatch({
+    type: FETCH_MOVIE_SEARCH,
+    payload: response,
   });
 };
