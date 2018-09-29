@@ -33,5 +33,4 @@ class Search extends Component {
     );
   }
 }
-let _;
 export default Search;

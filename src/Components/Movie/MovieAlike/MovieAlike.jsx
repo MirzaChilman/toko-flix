@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Wrapper from '../../Wrapper/Wrapper';
 import Spinner from '../../Spinner/Spinner';
 import KartuMovie from '../../Kartu/KartuMovie/KartuMovie';
-import { fetchAlike } from '../../../Redux/Actions/MovieListActions';
+import { fetchAlike, fetchRecommendation } from '../../../Redux/Actions/MovieListActions';
 
 class MovieAlike extends Component {
   state = {
@@ -14,6 +14,7 @@ class MovieAlike extends Component {
   async componentDidMount() {
     const { match } = this.props;
     await this.props.fetchAlike(match.params.movieId);
+    await this.props.fetchRecommendation(match.params.movieId);
     this.setState({
       isLoading: false,
     });
@@ -38,9 +39,7 @@ class MovieAlike extends Component {
           {isLoading ? (
             <Spinner />
           ) : (
-            movieAlike
-              .slice(0, 4)
-              .map(datum => <KartuMovie key={datum.id} {...datum} />)
+            movieAlike.slice(0, 10).map(datum => <KartuMovie key={datum.id} {...datum} />)
           )}
         </Wrapper>
       </Container>
@@ -54,5 +53,6 @@ export default connect(
   mapStateToProps,
   {
     fetchAlike,
+    fetchRecommendation,
   },
 )(MovieAlike);

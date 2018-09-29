@@ -1,15 +1,12 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchMovieCast, fetchMovieDetails } from '../../../Redux/Actions/MovieActions';
 import LazyLoad from 'react-lazyload';
-import {
-  fetchMovieCast,
-  fetchMovieDetails,
-} from '../../../Redux/Actions/MovieActions';
 import { calculatePrice, afforadbleHandler } from '../../../utils/Utils';
+import { dispatchAccountCredit } from '../../../Redux/Actions/AccountActions';
 import Spinner from '../../Spinner/Spinner';
 import './MovieInfo.css';
-import { dispatchAccountCredit } from '../../../Redux/Actions/AccountActions';
 class MovieDetail extends Component {
   state = {
     isLoading: true,
@@ -97,10 +94,7 @@ class MovieDetail extends Component {
                 <Spinner />
               ) : (
                 <LazyLoad height="100%" resize offset={100}>
-                  <img
-                    src={`http://image.tmdb.org/t/p/w500${poster_path}`}
-                    alt=""
-                  />
+                  <img src={`http://image.tmdb.org/t/p/w500${poster_path}`} alt="" />
                 </LazyLoad>
               )}
             </article>
@@ -108,12 +102,10 @@ class MovieDetail extends Component {
               <h1 className="text-center">{original_title}</h1>
               <div className="d-flex justify-content-between">
                 <p className="lead">
-                  Rating:{' '}
-                  <span className="text-warning">{vote_average}/ 10</span>
+                  Rating: <span className="text-warning">{vote_average}/ 10</span>
                 </p>
                 <p className="lead">
-                  Release Date:{' '}
-                  <span className="text-warning">{release_date}</span>
+                  Release Date: <span className="text-warning">{release_date}</span>
                 </p>
                 <p className="lead">
                   Runtime: <span className="text-warning">{runtime}</span> Hours
@@ -131,7 +123,7 @@ class MovieDetail extends Component {
               <div className="kontainer-item__cast text-center">
                 {!this.state.isLoading ? (
                   this.props.movieCast
-                    .slice(0, 3)
+                    .slice(0, 6)
                     .map(({ character, name, profile_path, cast_id }) => (
                       <figure key={cast_id}>
                         <LazyLoad height="100%" resize offset={100} once>
@@ -142,8 +134,7 @@ class MovieDetail extends Component {
                           />
                         </LazyLoad>
                         <figcaption className="text-center">
-                          {name} <span className="text-warning"> as</span>{' '}
-                          {character}
+                          {name} <span className="text-warning"> as</span> {character}
                         </figcaption>
                       </figure>
                     ))
@@ -179,5 +170,5 @@ export default connect(
     fetchMovieDetails,
     fetchMovieCast,
     buyMovie: dispatchAccountCredit,
-  }
+  },
 )(MovieDetail);

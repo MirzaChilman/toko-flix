@@ -5,11 +5,13 @@ import { fetchNowPlaying } from '../../Redux/Actions/MovieListActions';
 
 class Pagenation extends Component {
   componentDidMount() {
-    this.props.fetchNowPlaying(this.props.match.params.pageId);
+    const { fetchNowPlaying } = this.props;
+    fetchNowPlaying(this.props.match.params.pageId);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.props.fetchNowPlaying(nextProps.match.params.pageId);
+    const { fetchNowPlaying } = this.props;
+    fetchNowPlaying(nextProps.match.params.pageId);
   }
 
   render() {
@@ -46,10 +48,10 @@ class Pagenation extends Component {
     );
   }
 }
-let _;
+
 export default withRouter(
   connect(
-    _,
+    null,
     { fetchNowPlaying },
   )(Pagenation),
 );

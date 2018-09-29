@@ -48,20 +48,6 @@ class KartuMovie extends Component {
     }
   };
 
-  afforadbleHandler = () => {
-    const credit = JSON.parse(localStorage.getItem('storageCredit'));
-    const price = calculatePrice(this.props.vote_average);
-    const movie = JSON.parse(localStorage.getItem('storageMovie'));
-    const { id } = this.props;
-    if (credit < price && !movie.includes(id)) {
-      this.setState({
-        buttonStatus: 'Buy more Credit',
-        buttonStyle: 'btn-secondary',
-        buttonAttr: true,
-      });
-    }
-  };
-
   // invoke 2 function onClick event
   combineClickedEvent = (id, price) => {
     // change the movie store in redux
@@ -74,18 +60,14 @@ class KartuMovie extends Component {
   render() {
     /* eslint-disable camelcase */
     const {
-      poster_path,
-      id,
-      vote_average,
-      original_title,
-      overview,
+      poster_path, id, vote_average, original_title, overview,
     } = this.props;
     const { buttonStatus, buttonStyle, buttonAttr } = this.state;
     const price = calculatePrice(vote_average);
 
     return (
       <React.Fragment>
-        <div className="content" key={id} onMouseEnter={this.afforadbleHandler}>
+        <div className="content mb-3" key={id} onMouseEnter={this.afforadbleHandler}>
           <div className="content-overlay" />
           <LazyLoad height="100%" resize offset={100}>
             <img
@@ -138,8 +120,7 @@ KartuMovie.defaultProps = {
   buyMovie: 'buyMovie(id, vote_average)',
 };
 
-let _;
 export default connect(
-  _,
+  null,
   { buyMovie: dispatchAccountCredit },
 )(KartuMovie);

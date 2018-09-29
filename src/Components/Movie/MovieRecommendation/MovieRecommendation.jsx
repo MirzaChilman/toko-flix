@@ -5,17 +5,20 @@ import PropTypes from 'prop-types';
 import Wrapper from '../../Wrapper/Wrapper';
 import Spinner from '../../Spinner/Spinner';
 import KartuMovie from '../../Kartu/KartuMovie/KartuMovie';
-import { fetchRecommendation } from '../../../Redux/Actions/MovieListActions';
+import { fetchRecommendation, fetchAlike } from '../../../Redux/Actions/MovieListActions';
 
 class MovieRecommendation extends Component {
   state = {
     isLoading: true,
   };
 
+  
+
   async componentDidMount() {
     const { match } = this.props;
-    const { fetchRecommendation } = this.props;
+    const { fetchRecommendation, fetchAlike } = this.props;
     await fetchRecommendation(match.params.movieId);
+    await fetchAlike(match.params.movieId);
     this.setState({
       isLoading: false,
     });
@@ -42,9 +45,7 @@ class MovieRecommendation extends Component {
           {isLoading ? (
             <Spinner />
           ) : (
-            movieRecommendations
-              .slice(0, 4)
-              .map(datum => <KartuMovie key={datum.id} {...datum} />)
+            movieRecommendations.slice(0, 10).map(datum => <KartuMovie key={datum.id} {...datum} />)
           )}
         </Wrapper>
       </Container>
@@ -63,5 +64,6 @@ export default connect(
   mapStateToProps,
   {
     fetchRecommendation,
+    fetchAlike,
   },
 )(MovieRecommendation);
