@@ -3,7 +3,7 @@
 This project created to fullfill job requirement task, the project itself was bootstrapping using `create-react-app` to increase development time (`webpack` add complexity and increase development time, tho it way much powerful).
 
 # Getting Started
-In order to use this application, simply `git clone` this repository and run `npm install` then `npm start` for starting the application in `localhost environment`. It is advisable to `npm run build` then run `surge -s build` in order to bundled the application so it will boost performance. Another way to access the application is through this [link](https://delicious.surge.sh).
+In order to use this application, simply `git clone` this repository and run `npm install` then `npm start` for starting the application in `localhost environment`. It is advisable to `npm run build` then run `surge -s build` in order to bundled the application so it will boost performance. Another way to access the application is through this [link](https://suspicious-lewin-1869a5.netlify.com/).
 
 # Linting
 
