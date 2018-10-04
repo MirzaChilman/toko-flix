@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import LazyLoad from 'react-lazyload';
 import { connect } from 'react-redux';
@@ -7,14 +7,24 @@ import { calculatePrice, titleToSlug } from '../../../utils/Utils';
 import { dispatchAccountCredit } from '../../../Redux/Actions/AccountActions';
 import './KartuMovie.css';
 
-class KartuMovie extends Component {
-  state = {
+/* interface Props {
+  buyMovie: dispatchAccountCredit
+}
+
+interface State {
+  buttonStatus: string
+  buttonStyle:string
+  buttonAttr:boolean
+} */
+
+class KartuMovie extends React.Component {
+   state = {
     buttonStatus: 'buy',
     buttonStyle: 'btn-danger',
     buttonAttr: false,
   };
 
-  componentDidMount() {
+   componentDidMount() {
     // get movie
     const movie = JSON.parse(localStorage.getItem('storageMovie'));
     const { id } = this.props;

@@ -1,20 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Container } from 'reactstrap';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import Wrapper from '../../Wrapper/Wrapper';
 import Spinner from '../../Spinner/Spinner';
 import KartuMovie from '../../Kartu/KartuMovie/KartuMovie';
 import { fetchRecommendation, fetchAlike } from '../../../Redux/Actions/MovieListActions';
 
-class MovieRecommendation extends Component {
-  state = {
+interface Props{
+  fetchRecommendation: {}
+}
+
+interface State {
+  isLoading:boolean
+}
+
+class MovieRecommendation extends React.Component<Props,State> {
+  public state = {
     isLoading: true,
   };
 
-  
-
-  async componentDidMount() {
+  public async componentDidMount() {
     const { match } = this.props;
     const { fetchRecommendation, fetchAlike } = this.props;
     await fetchRecommendation(match.params.movieId);
@@ -24,7 +29,7 @@ class MovieRecommendation extends Component {
     });
   }
 
-  componentDidUpdate(prevProps) {
+  public componentDidUpdate(prevProps) {
     const { match } = this.props;
     if (prevProps.match !== match) {
       // eslint-disable-react/no-did-update-set-state
@@ -35,7 +40,7 @@ class MovieRecommendation extends Component {
     }
   }
 
-  render() {
+  public  render() {
     const { isLoading } = this.state;
     const { movieRecommendations } = this.props;
     return (
@@ -53,9 +58,6 @@ class MovieRecommendation extends Component {
   }
 }
 
-MovieRecommendation.propTypes = {
-  fetchRecommendation: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = state => ({
   movieRecommendations: state.movieList.movieRecommendations,
