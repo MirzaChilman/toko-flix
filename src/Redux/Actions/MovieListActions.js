@@ -6,7 +6,7 @@ import {
 } from './actionCreators';
 import API from '../../utils/API';
 
-export const fetchNowPlaying = id => async dispatch => {
+const fetchNowPlaying = id => async dispatch => {
   const response = await API.fetchMovieData(
     '/movie/now_playing?',
     `${id ? `&page=${id}` : ''}`,
@@ -17,7 +17,7 @@ export const fetchNowPlaying = id => async dispatch => {
   });
 };
 
-export const fetchRecommendation = id => async dispatch => {
+const fetchRecommendation = id => async dispatch => {
   const response = await API.fetchMovieData(
     `/movie/${id}/recommendations?`,
     '&language=en-US&page=1',
@@ -28,7 +28,7 @@ export const fetchRecommendation = id => async dispatch => {
   });
 };
 
-export const fetchAlike = id => async dispatch => {
+const fetchAlike = id => async dispatch => {
   const response = await API.fetchMovieData(
     `/movie/${id}/similar?`,
     '&language=en-US&page=1',
@@ -39,10 +39,12 @@ export const fetchAlike = id => async dispatch => {
   });
 };
 
-export const searchMovie = query => dispatch => {
+const searchMovie = query => dispatch => {
   const response = query;
   dispatch({
     type: FETCH_MOVIE_SEARCH,
     payload: response,
   });
 };
+
+export { fetchNowPlaying, fetchRecommendation, fetchAlike, searchMovie };
