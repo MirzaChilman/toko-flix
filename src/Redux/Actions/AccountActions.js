@@ -5,7 +5,7 @@ import {
   DISPATCH_ACCOUNT_CREDIT,
 } from './actionCreators';
 
-export const requestAccountCredit = () => async (dispatch) => {
+const requestAccountCredit = () => async dispatch => {
   if (localStorage.getItem('storageCredit') === null) {
     localStorage.setItem('storageCredit', 100000);
   }
@@ -16,7 +16,7 @@ export const requestAccountCredit = () => async (dispatch) => {
   });
 };
 
-export const dispatchAccountCredit = (movieId, price) => async (dispatch) => {
+const dispatchAccountCredit = (movieId, price) => async dispatch => {
   let remainingCredit = price;
   let movie = movieId;
   if (localStorage.getItem('storageMovie') === null) {
@@ -24,7 +24,6 @@ export const dispatchAccountCredit = (movieId, price) => async (dispatch) => {
     movie.push(movieId);
     // set local storage with new movie array
     localStorage.setItem('storageMovie', JSON.stringify(movie));
-
   } else {
     // get movie from local storage
     const movie = JSON.parse(localStorage.getItem('storageMovie'));
@@ -35,15 +34,14 @@ export const dispatchAccountCredit = (movieId, price) => async (dispatch) => {
     // get credit account
     const creditAccount = JSON.parse(localStorage.getItem('storageCredit'));
     // calculate remaining credit
-    if(creditAccount > price){
+    if (creditAccount > price) {
       remainingCredit = creditAccount - price;
-    }else {
-      return false
+    } else {
+      return false;
     }
     // set remaining creadit to creditAccount storage
     localStorage.setItem('storageCredit', JSON.stringify(remainingCredit));
     // call component didMount
-
   }
 
   dispatch({
@@ -51,3 +49,5 @@ export const dispatchAccountCredit = (movieId, price) => async (dispatch) => {
     payload: remainingCredit,
   });
 };
+
+export { requestAccountCredit, dispatchAccountCredit };
