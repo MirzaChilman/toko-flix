@@ -9,10 +9,10 @@ const initialState = {
   movieIndonesia: [],
   movieRecommendations: [],
   movieAlike: [],
-  movieSearch: [],
+  searchQuery: '',
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case FETCH_MOVIE_INDONESIA:
       return {
@@ -32,7 +32,7 @@ export default function (state = initialState, action) {
     case FETCH_MOVIE_SEARCH:
       return {
         ...state,
-        movieSearch: action.payload,
+        searchQuery: action.payload,
       };
     default:
       return state;
