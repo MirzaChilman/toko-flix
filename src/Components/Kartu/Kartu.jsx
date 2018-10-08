@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import KartuMovie from './KartuMovie/KartuMovie';
 import Wrapper from '../Wrapper/Wrapper';
 import Spinner from '../Spinner/Spinner';
 
-const Kartu = (props) => {
-  const { movieIndonesia, isLoading } = props;
+const Kartu = props => {
+  const { movieIndonesia, isLoading, searchState } = props;
 
   return (
     <React.Fragment>
@@ -14,7 +15,14 @@ const Kartu = (props) => {
         {isLoading ? (
           <Spinner />
         ) : (
-          movieIndonesia.map(datum => <KartuMovie key={datum.id} {...datum} />)
+          movieIndonesia
+            .filter(
+              datum =>
+                `${datum.title}`
+                  .toUpperCase()
+                  .indexOf(searchState.toUpperCase()) >= 0,
+            )
+            .map(datum => <KartuMovie key={datum.id} {...datum} />)
         )}
       </Wrapper>
     </React.Fragment>
@@ -34,4 +42,9 @@ Kartu.propTypes = {
   ).isRequired,
   isLoading: PropTypes.bool.isRequired,
 };
-export default Kartu;
+
+const mapStateToProps = state => ({
+  searchState: state.movieList.searchQuery,
+});
+
+export default connect(mapStateToProps)(Kartu);
