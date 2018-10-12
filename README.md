@@ -15,7 +15,7 @@ The application is using Reactstrap or Bootstrap for React. It is also use SASS 
 
 # Additional Information
 
-1- Please use the latest Chrome or Firefox browser, since the application use CSS Grid, which some older browser does not support. The polyfilling does not added in the project.
+1- Please use the latest Chrome or Firefox browser, since the application use CSS Grid, which some older browser does not support. The polyfilling does not added in the project so bear it in mind.
 
 2- if `Uncaught TypeError: Cannot read property 'apply' of undefined` happen, please instal redux and react developer tools which you can find it in [here](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) and [here](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)(respectively) for chrome or in firefox by simply type keyword of `react` or `redux developer tools for firefox`
 
