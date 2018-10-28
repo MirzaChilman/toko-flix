@@ -7,7 +7,7 @@ In order to use this application, simply `git clone` this repository and run `np
 
 # Linting
 
-The application is using AirBnB linter. Linter is used for consistency of the code, so the style of the code will almost exactly the same across different developers whom develop the application.
+The application is using AirBnB linter. Linter is used for consistency of the code, so the style of the code will almost exactly the same across different developers whom develop the application .
 
 # Style
 
