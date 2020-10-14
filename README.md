@@ -20,3 +20,9 @@ The application is using Reactstrap or Bootstrap for React. It is also use SASS 
 2- if `Uncaught TypeError: Cannot read property 'apply' of undefined` happen, please instal redux and react developer tools which you can find it in [here](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) and [here](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)(respectively) for chrome or in firefox by simply type keyword of `react` or `redux developer tools for firefox`
 
 3- For any help to run the application please contact me directly for assistance. 
+
+# Next Step Plan
+
+1. Update the hosting
+2. Update the code with the newest react
+3. Dockerize apss
