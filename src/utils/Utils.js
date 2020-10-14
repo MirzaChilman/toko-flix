@@ -21,11 +21,3 @@ export const titleToSlug = (string) => {
   const str = string.replace(/\s+/g, '-').toLowerCase();
   return str;
 };
-
-export const checkMovie = (movie, movieClicked) => {
-  if (movie === movieClicked) {
-    console.log('HOLA');
-  } else {
-    console.log('hALO');
-  }
-};
