@@ -1,11 +1,14 @@
 import React, { Suspense } from "react";
 import logo from "./logo.svg";
-import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import Home from "./pages/Home/Home";
+import "./App.less";
+
 import { Layout } from "antd";
+
+const Home = React.lazy(() => import("./pages/Home/Home"));
+const Detail = React.lazy(() => import("./pages/Detail/Detail"));
 
 function App() {
   return (
@@ -13,7 +16,8 @@ function App() {
       <Header />
       <Suspense fallback={"Loading"}>
         <Switch>
-          <Route path="/" component={Home} />
+          <Route path="/movies" component={Home} />
+          <Route exact path="/movie/:id" component={Detail} />
         </Switch>
       </Suspense>
 

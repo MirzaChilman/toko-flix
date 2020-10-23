@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Row, Col } from "antd";
+import { Layout, Row, Col, Skeleton, Card } from "antd";
+import { useLocation } from "react-router-dom";
+import styled from "styled-components";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import axios from "axios";
 
@@ -19,17 +21,30 @@ const moviesUrl = {
 
 const { Content } = Layout;
 
+const StyledCard = styled(Card)`
+  border: 1px solid red !important;
+`;
+
 const Home = () => {
+  const location = useLocation();
   const [movies, setMovies] = useState([]);
   const [fetchingMovies, setFetchingMovies] = useState(false);
 
   useEffect(() => {
     const fetchMovie = async () => {
+      let response;
       try {
         setFetchingMovies(true);
-        const response = await axios.get(
-          `${BASE_URL}${moviesUrl.nowPlaying}?${API_KEY}`
-        );
+        if (location.pathname.includes("now-playing")) {
+          response = await axios.get(
+            `${BASE_URL}${moviesUrl.nowPlaying}?${API_KEY}`
+          );
+        }
+        if (location.pathname.includes("popular")) {
+          response = await axios.get(
+            `${BASE_URL}${moviesUrl.popular}?${API_KEY}`
+          );
+        }
         setMovies(response.data.results);
       } catch (e) {
         console.error(e);
@@ -38,25 +53,14 @@ const Home = () => {
       }
     };
     fetchMovie();
-  }, []);
-  return (
-    <Content
-      style={{
-        padding: "50px 50px",
-        marginTop: 64,
-        backgroundColor: "#323232",
-      }}
-    >
-      <Row gutter={[16,16]}>
+  }, [location.pathname]);
+
+  const renderMovies = () => {
+    return (
+      <>
         {!fetchingMovies &&
           movies.map((movie) => {
-            const {
-              poster_path,
-              vote_average,
-              title,
-              overview,
-              id,
-            } = movie;
+            const { poster_path, vote_average, title, overview, id } = movie;
             return (
               <Col xs={24} md={12} lg={8} xl={6}>
                 <div
@@ -76,6 +80,37 @@ const Home = () => {
               </Col>
             );
           })}
+      </>
+    );
+  };
+
+  const renderLoadingCards = () => {
+    const cards = [];
+    for (let i = 0; i < 20; i++) {
+      cards.push(
+        <Col xs={24} md={12} lg={8} xl={6}>
+          <Card bordered={false}>
+            <Skeleton loading active />
+            <Skeleton loading active />
+            <Skeleton loading active />
+          </Card>
+        </Col>
+      );
+    }
+    return cards;
+  };
+
+  return (
+    <Content
+      style={{
+        padding: "50px 50px",
+        marginTop: 64,
+        backgroundColor: "#323232",
+      }}
+    >
+      <Row gutter={[16, 16]}>
+        {!fetchingMovies && renderMovies()}
+        {fetchingMovies && renderLoadingCards()}
       </Row>
     </Content>
   );
