@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Image, Button } from "antd";
 import { useHistory, Link } from "react-router-dom";
 import styled from "styled-components";
@@ -91,8 +91,9 @@ const MovieCard = ({
   title,
   overview,
   price,
+  handleAddCollectionButton,
+  disabled,
 }) => {
-  const history = useHistory();
   return (
     <StyledDiv className="content" key={id} onMouseEnter={() => {}}>
       <div className="content-overlay" />
@@ -106,18 +107,21 @@ const MovieCard = ({
         <p className="content-text">{`${vote_average} / 10`}</p>
         <p className="content-text">{`Rp.${price}`}</p>
         <Button block danger type={"primary"}>
-          <Link
-            to={`/movie/${id}`}
-            className="btn btn-outline-primary btn-block"
+          <Link to={`/movie/${id}`}>Learn More</Link>
+        </Button>
+        <br />
+        <br />
+        {handleAddCollectionButton && (
+          <Button
+            block
+            size={"large"}
+            type={"primary"}
+            onClick={handleAddCollectionButton}
+            disabled={disabled}
           >
-            Learn More
-          </Link>
-        </Button>
-        <br />
-        <br />
-        <Button block size={"large"} type={"primary"} onClick={() => {}}>
-          Buy
-        </Button>
+            {disabled ? "Already Favorited" : "Add to my favorites"}
+          </Button>
+        )}
       </div>
     </StyledDiv>
   );

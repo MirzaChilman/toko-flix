@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import axios from "axios";
+import { calculatePrice } from "../../utils/utils";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = "api_key=ae4dc1e91f4721e7f574d512da8263fd";
@@ -17,6 +18,7 @@ const moviesUrl = {
   popular: `/movie/popular`,
   latest: `/movie/latest`,
   detail: "/movie/detail",
+  upcoming: "/movie/upcoming",
 };
 
 const { Content } = Layout;
@@ -30,19 +32,30 @@ const Home = () => {
   const [movies, setMovies] = useState([]);
   const [fetchingMovies, setFetchingMovies] = useState(false);
 
+  const [favoritedMovies, setFavoritedMovies] = useState(
+    JSON.parse(localStorage.getItem("favoritedMovies")) || []
+  );
+
   useEffect(() => {
     const fetchMovie = async () => {
       let response;
+      const nowPlaying = location.pathname.includes("now-playing");
+      const popular = location.pathname.includes("popular");
       try {
         setFetchingMovies(true);
-        if (location.pathname.includes("now-playing")) {
+        if (nowPlaying) {
           response = await axios.get(
             `${BASE_URL}${moviesUrl.nowPlaying}?${API_KEY}`
           );
         }
-        if (location.pathname.includes("popular")) {
+        if (popular) {
           response = await axios.get(
             `${BASE_URL}${moviesUrl.popular}?${API_KEY}`
+          );
+        }
+        if (!nowPlaying && !popular) {
+          response = await axios.get(
+            `${BASE_URL}${moviesUrl.upcoming}?${API_KEY}`
           );
         }
         setMovies(response.data.results);
@@ -55,12 +68,27 @@ const Home = () => {
     fetchMovie();
   }, [location.pathname]);
 
+  const handleAddCollectionButton = (movie) => {
+    const { poster_path, vote_average, title, overview, id } = movie;
+    setFavoritedMovies((prevState) => {
+      const combinedMovies = [
+        ...prevState,
+        { poster_path, vote_average, title, overview, id },
+      ];
+      localStorage.setItem("favoritedMovies", JSON.stringify(combinedMovies));
+      return combinedMovies;
+    });
+  };
+
   const renderMovies = () => {
     return (
       <>
         {!fetchingMovies &&
           movies.map((movie) => {
             const { poster_path, vote_average, title, overview, id } = movie;
+            const isDisabled = favoritedMovies.find((movie) => {
+              return movie.id === id;
+            });
             return (
               <Col xs={24} md={12} lg={8} xl={6}>
                 <div
@@ -74,7 +102,11 @@ const Home = () => {
                     vote_average={vote_average}
                     title={title}
                     overview={overview}
-                    price={"10000"}
+                    price={calculatePrice(vote_average)}
+                    handleAddCollectionButton={() =>
+                      handleAddCollectionButton(movie)
+                    }
+                    disabled={isDisabled}
                   />
                 </div>
               </Col>

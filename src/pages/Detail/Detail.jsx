@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { Row, Col, Layout, Image, Typography, Card } from "antd";
 import axios from "axios";
 import { calculatePrice } from "../../utils/utils";
+import styled from "styled-components";
 
 const { Title, Text } = Typography;
 const { Content } = Layout;
@@ -21,6 +22,14 @@ const moviesUrl = {
   latest: `/movie/latest`,
   detail: "/movie",
 };
+
+const StyledTitle = styled(Title)`
+  color: white !important;
+`;
+
+const StyledText = styled(Text)`
+  color: white !important;
+`;
 
 const Detail = () => {
   const params = useParams();
@@ -77,39 +86,43 @@ const Detail = () => {
 
   const renderMovieDetail = () => (
     <Col xs={24} sm={24} md={24} xl={12}>
-      <Title
+      <StyledTitle
         style={{
           textAlign: "center",
         }}
       >
         {movie.title}
-      </Title>
+      </StyledTitle>
       <Row justify="between">
         <Col md={8}>
-          <Title level={5}>Rating: {movie.vote_average} / 10</Title>
+          <StyledTitle level={5}>Rating: {movie.vote_average} / 10</StyledTitle>
         </Col>
         <Col md={8}>
-          <Title level={5}>Release Date: {movie.release_date}</Title>
+          <StyledTitle level={5}>
+            Release Date: {movie.release_date}
+          </StyledTitle>
         </Col>
         <Col md={8}>
-          <Title level={5}>Runtime: {movie.runtime} minutes</Title>
+          <StyledTitle level={5}>Runtime: {movie.runtime} minutes</StyledTitle>
         </Col>
       </Row>
       <Row>
         <Col>
-          <Title>Price: Rp.{calculatePrice(movie.vote_average)}</Title>
-          <Text>{movie.overview}</Text>
+          <StyledTitle>
+            Price: Rp.{calculatePrice(movie.vote_average)}
+          </StyledTitle>
+          <StyledText>{movie.overview}</StyledText>
         </Col>
       </Row>
       <Row>
         <Col>
-          <Title
+          <StyledTitle
             style={{
               marginTop: "16px",
             }}
           >
             Starring:
-          </Title>
+          </StyledTitle>
           <Row gutter={[16, 32]}>
             {credits.map((credit) => {
               const { name, character, profile_path } = credit;
@@ -130,6 +143,9 @@ const Detail = () => {
                         height={240}
                       />
                     }
+                    bodyStyle={{
+                      color: "white",
+                    }}
                   >
                     {`${name}`}
                     &nbsp;
