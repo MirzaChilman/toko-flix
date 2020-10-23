@@ -1,22 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Card, Image, Button } from "antd";
-import { useHistory, Link } from "react-router-dom";
+import React from "react";
+import { Button } from "antd";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-// import "./MovieCard.css";
-const { Meta } = Card;
-
-const NO_TITLE = "There is no title";
-const NO_DESCRIPTION = "There is no description";
-
-/**
- *
- * @param {string} description
- * @param {string } img
- * @param {string} title
- * @param {string} slug
- * @returns {React.ReactNode}
- * @constructor
- */
 
 const StyledDiv = styled.div`
   position: relative;

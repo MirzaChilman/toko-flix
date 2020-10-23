@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import { Col, Layout, Row, Button, Empty } from "antd";
 import MovieCard from "../../components/MovieCard/MovieCard";
-import styled from "styled-components";
 import { calculatePrice } from "../../utils/utils";
+import {background_color_main} from "../../colors";
 const { Content } = Layout;
-
-const StyledCol = styled(Col)`
-  height: "65vh";
-`;
 
 const MyMovie = () => {
   const [favoritedMovies, setFavoritedMovies] = useState(
@@ -71,7 +67,7 @@ const MyMovie = () => {
       style={{
         padding: "50px 50px",
         marginTop: 64,
-        backgroundColor: "#323232",
+        backgroundColor: background_color_main,
       }}
     >
       {favoritedMovies.length > 0 && (

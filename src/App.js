@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import logo from "./logo.svg";
 import { Switch, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";

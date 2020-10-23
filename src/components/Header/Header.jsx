@@ -1,19 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  Row,
-  Col,
-  Layout,
-  Menu,
-  Image,
-  Button,
-  Modal,
-  Input,
-  Typography,
-  notification,
-} from "antd";
+import { Layout, Menu, Image } from "antd";
 
-const { Text } = Typography;
 const { Header: AntHeader } = Layout;
 
 const menus = [

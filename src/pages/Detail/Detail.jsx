@@ -4,18 +4,11 @@ import { Row, Col, Layout, Image, Typography, Card } from "antd";
 import axios from "axios";
 import { calculatePrice } from "../../utils/utils";
 import styled from "styled-components";
+import {background_color_main} from "../../colors";
 
 const { Title, Text } = Typography;
 const { Content } = Layout;
-const { Meta } = Card;
 
-const BASE_URL = "https://api.themoviedb.org/3";
-const API_KEY = "api_key=ae4dc1e91f4721e7f574d512da8263fd";
-
-/**
- *
- * @type {{nowPlaying: string, popular: string, latest: string}}
- */
 const moviesUrl = {
   nowPlaying: `/movie/now_playing`,
   popular: `/movie/popular`,
@@ -42,7 +35,7 @@ const Detail = () => {
       try {
         setFetchingMovie(true);
         const response = await axios.get(
-          `${BASE_URL}${moviesUrl.detail}/${params.id}?${API_KEY}`
+          `${process.env.REACT_APP_BASE_URL}${moviesUrl.detail}/${params.id}?api_key=${process.env.REACT_APP_API_KEY}`
         );
         console.log(response);
         setMovie(response.data);
@@ -56,7 +49,7 @@ const Detail = () => {
       try {
         setFetchingMovie(true);
         const response = await axios.get(
-          `${BASE_URL}/movie/${params.id}/credits?${API_KEY}`
+          `${process.env.REACT_APP_BASE_URL}/movie/${params.id}/credits?api_key=${process.env.REACT_APP_API_KEY}`
         );
         console.log(response);
         const getCast = response.data.cast.slice(0, 4);
@@ -173,7 +166,7 @@ const Detail = () => {
       style={{
         padding: "50px 50px",
         marginTop: 64,
-        backgroundColor: "#323232",
+        backgroundColor: background_color_main,
       }}
     >
       <Row>

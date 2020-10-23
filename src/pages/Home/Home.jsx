@@ -1,31 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Layout, Row, Col, Skeleton, Card } from "antd";
 import { useLocation } from "react-router-dom";
-import styled from "styled-components";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import axios from "axios";
 import { calculatePrice } from "../../utils/utils";
 
-const BASE_URL = "https://api.themoviedb.org/3";
-const API_KEY = "api_key=ae4dc1e91f4721e7f574d512da8263fd";
-
-/**
- *
- * @type {{nowPlaying: string, popular: string, latest: string}}
- */
+const { Content } = Layout;
 const moviesUrl = {
   nowPlaying: `/movie/now_playing`,
   popular: `/movie/popular`,
-  latest: `/movie/latest`,
-  detail: "/movie/detail",
   upcoming: "/movie/upcoming",
 };
-
-const { Content } = Layout;
-
-const StyledCard = styled(Card)`
-  border: 1px solid red !important;
-`;
 
 const Home = () => {
   const location = useLocation();
@@ -41,21 +26,22 @@ const Home = () => {
       let response;
       const nowPlaying = location.pathname.includes("now-playing");
       const popular = location.pathname.includes("popular");
+      console.log(process.env);
       try {
         setFetchingMovies(true);
         if (nowPlaying) {
           response = await axios.get(
-            `${BASE_URL}${moviesUrl.nowPlaying}?${API_KEY}`
+            `${process.env.REACT_APP_BASE_URL}${moviesUrl.nowPlaying}?api_key=${process.env.REACT_APP_API_KEY}`
           );
         }
         if (popular) {
           response = await axios.get(
-            `${BASE_URL}${moviesUrl.popular}?${API_KEY}`
+            `${process.env.REACT_APP_BASE_URL}${moviesUrl.popular}?api_key=${process.env.REACT_APP_API_KEY}`
           );
         }
         if (!nowPlaying && !popular) {
           response = await axios.get(
-            `${BASE_URL}${moviesUrl.upcoming}?${API_KEY}`
+            `${process.env.REACT_APP_BASE_URL}${moviesUrl.upcoming}?api_key=${process.env.REACT_APP_API_KEY}`
           );
         }
         setMovies(response.data.results);
