@@ -8,7 +8,7 @@ The version 2 of the apps has almost similar functionality but with better code 
 In order to run you need to install nodejs, please follow [this](https://nodejs.org/en/download/) guide to install nodejs. After having nodejs the following are needed to run the project
 
 for development purpose please do:
-1. Run `npm install -g nodemon`
+1. Run `npm install -g nodemon && npm install`
 2. Run `npm run dev`
 
 for non-development purpose please do:
