@@ -4,18 +4,11 @@ import { Row, Col, Layout, Image, Typography, Card } from "antd";
 import axios from "axios";
 import { calculatePrice } from "../../utils/utils";
 import styled from "styled-components";
+import {background_color_main} from "../../colors";
 
 const { Title, Text } = Typography;
 const { Content } = Layout;
-const { Meta } = Card;
 
-const BASE_URL = "https://api.themoviedb.org/3";
-const API_KEY = "api_key=ae4dc1e91f4721e7f574d512da8263fd";
-
-/**
- *
- * @type {{nowPlaying: string, popular: string, latest: string}}
- */
 const moviesUrl = {
   nowPlaying: `/movie/now_playing`,
   popular: `/movie/popular`,
@@ -31,10 +24,10 @@ const StyledText = styled(Text)`
   color: white !important;
 `;
 
-const Detail = () => {
+const MovieDetail = () => {
   const params = useParams();
-  const [movie, setMovie] = useState([]);
-  const [credits, setCredits] = useState([]);
+  const [movieDetail, setMovieDetail] = useState([]);
+  const [movieCredits, setMovieCredits] = useState([]);
 
   const [fetchingMovie, setFetchingMovie] = useState(false);
   useEffect(() => {
@@ -42,10 +35,10 @@ const Detail = () => {
       try {
         setFetchingMovie(true);
         const response = await axios.get(
-          `${BASE_URL}${moviesUrl.detail}/${params.id}?${API_KEY}`
+          `${process.env.REACT_APP_BASE_URL}${moviesUrl.detail}/${params.id}?api_key=${process.env.REACT_APP_API_KEY}`
         );
         console.log(response);
-        setMovie(response.data);
+        setMovieDetail(response.data);
       } catch (e) {
         console.error(e);
       } finally {
@@ -56,11 +49,10 @@ const Detail = () => {
       try {
         setFetchingMovie(true);
         const response = await axios.get(
-          `${BASE_URL}/movie/${params.id}/credits?${API_KEY}`
+          `${process.env.REACT_APP_BASE_URL}/movie/${params.id}/credits?api_key=${process.env.REACT_APP_API_KEY}`
         );
-        console.log(response);
         const getCast = response.data.cast.slice(0, 4);
-        setCredits(getCast);
+        setMovieCredits(getCast);
       } catch (e) {
         console.error(e);
       } finally {
@@ -71,14 +63,14 @@ const Detail = () => {
     fetchMovieDetail();
   }, []);
 
-  const renderMainPoster = () => (
+  const renderMoviePoster = () => (
     <Col xs={23} sm={23} md={23} xl={11} offset={1}>
       <Image
         style={{
           height: "350px",
         }}
-        src={`http://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-        alt={movie.title}
+        src={`http://image.tmdb.org/t/p/w500/${movieDetail.poster_path}`}
+        alt={movieDetail.title}
         placeholder
       />
     </Col>
@@ -91,27 +83,27 @@ const Detail = () => {
           textAlign: "center",
         }}
       >
-        {movie.title}
+        {movieDetail.title}
       </StyledTitle>
       <Row justify="between">
         <Col md={8}>
-          <StyledTitle level={5}>Rating: {movie.vote_average} / 10</StyledTitle>
+          <StyledTitle level={5}>Rating: {movieDetail.vote_average} / 10</StyledTitle>
         </Col>
         <Col md={8}>
           <StyledTitle level={5}>
-            Release Date: {movie.release_date}
+            Release Date: {movieDetail.release_date}
           </StyledTitle>
         </Col>
         <Col md={8}>
-          <StyledTitle level={5}>Runtime: {movie.runtime} minutes</StyledTitle>
+          <StyledTitle level={5}>Runtime: {movieDetail.runtime} minutes</StyledTitle>
         </Col>
       </Row>
       <Row>
         <Col>
           <StyledTitle>
-            Price: Rp.{calculatePrice(movie.vote_average)}
+            Price: Rp.{calculatePrice(movieDetail.vote_average)}
           </StyledTitle>
-          <StyledText>{movie.overview}</StyledText>
+          <StyledText>{movieDetail.overview}</StyledText>
         </Col>
       </Row>
       <Row>
@@ -124,7 +116,7 @@ const Detail = () => {
             Starring:
           </StyledTitle>
           <Row gutter={[16, 32]}>
-            {credits.map((credit) => {
+            {movieCredits.map((credit) => {
               const { name, character, profile_path } = credit;
               return (
                 <Col>
@@ -173,15 +165,15 @@ const Detail = () => {
       style={{
         padding: "50px 50px",
         marginTop: 64,
-        backgroundColor: "#323232",
+        backgroundColor: background_color_main,
       }}
     >
       <Row>
-        {renderMainPoster()}
+        {renderMoviePoster()}
         {renderMovieDetail()}
       </Row>
     </Content>
   );
 };
 
-export default Detail;
+export default MovieDetail;

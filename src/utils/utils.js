@@ -1,3 +1,8 @@
+/**
+ *
+ * @param {number} vote
+ * @returns {string}
+ */
 export const calculatePrice = (vote) => {
   let price;
 
