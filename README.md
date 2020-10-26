@@ -1,9 +1,9 @@
-#Overview
+# Overview
 This project is built using [`create-react-app`](https://github.com/facebook/create-react-app). The project is an improvement of an app that has been built 2 years ago (see [legacy code](https://github.com/MirzaChilman/mini-project/tree/legacy)). The project originally idea inspired by [netflix](http://netflix.com/), in the original apps the user able to buy an movie that later will be stored to local storage.
 
 The version 2 of the apps has almost similar functionality but with better code and also change the core functionality from buying a movie to add favorite movies 
 
-#How to run
+# How to run
 
 In order to run you need to install nodejs, please follow [this](https://nodejs.org/en/download/) guide to install nodejs. After having nodejs the following are needed to run the project
 
@@ -15,11 +15,11 @@ for non-development purpose please do:
 1. Run `npm install`
 2. Run `npm start` 
 
-#Tutorial
+# Tutorial
 
 This project contains a written tutorial that can be found in `tutorial/` folders
 
-#License
+# License
 The MIT License
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
