@@ -1,22 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Layout, Menu, Image } from "antd";
-
 const { Header: AntHeader } = Layout;
 
 const menus = [
-  {
-    label: "Popular",
-    to: "/movies/popular",
-  },
-  {
-    label: "Now Playing",
-    to: "/movies/now-playing",
-  },
-  {
-    label: "My movies",
-    to: "/my-account/favorites",
-  },
+  { label: "Popular", to: "/movies/popular"},
+  { label: "Now Playing", to: "/movies/now-playing" },
+  { label: "My movies", to: "/my-account/favorites" },
 ];
 
 const Header = () => {
@@ -31,7 +21,6 @@ const Header = () => {
       }}
     >
       <div className="logo" />
-
       <Menu
         theme="dark"
         mode="horizontal"
@@ -48,7 +37,7 @@ const Header = () => {
           <Link to={"/"}>
             <Image
               src={
-                "https://raw.githubusercontent.com/MirzaChilman/mini-project/master/src/assets/Netflix-logo.png"
+                "https://raw.githubusercontent.com/MirzaChilman/mini-project/legacy/src/assets/Netflix-logo.png"
               }
               preview={false}
             />

@@ -12,7 +12,7 @@ const Footer = () => {
         color: "white",
       }}
     >
-      Ant Design ©2018 Created by Ant UED
+      Toko Flix ©2020 Created by Ant UED
     </AntFooter>
   );
 };

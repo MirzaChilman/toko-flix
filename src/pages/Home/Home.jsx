@@ -3,13 +3,29 @@ import { Layout, Row, Col, Skeleton, Card } from "antd";
 import { useLocation } from "react-router-dom";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import axios from "axios";
-import { calculatePrice } from "../../utils/utils";
 
 const { Content } = Layout;
 const moviesUrl = {
   nowPlaying: `/movie/now_playing`,
   popular: `/movie/popular`,
   upcoming: "/movie/upcoming",
+};
+
+export const calculatePrice = (vote) => {
+  let price;
+
+  if (vote > 0 && vote <= 3) {
+    price = `${vote * 3500}`;
+  } else if (vote > 3 && vote <= 6) {
+    price = `${vote * 8250}`;
+  } else if (vote > 6 && vote <= 8) {
+    price = `${vote * 16350}`;
+  } else if (vote > 8 && vote <= 10) {
+    price = `${vote * 21250}`;
+  } else {
+    price = "Unavailable";
+  }
+  return price;
 };
 
 const Home = () => {
@@ -24,22 +40,21 @@ const Home = () => {
   useEffect(() => {
     const fetchMovie = async () => {
       let response;
-      const nowPlaying = location.pathname.includes("now-playing");
-      const popular = location.pathname.includes("popular");
-      console.log(process.env);
+      const isNowPlaying = location.pathname.includes("now-playing");
+      const isPopular = location.pathname.includes("popular");
       try {
         setFetchingMovies(true);
-        if (nowPlaying) {
+        if (isNowPlaying) {
           response = await axios.get(
             `${process.env.REACT_APP_BASE_URL}${moviesUrl.nowPlaying}?api_key=${process.env.REACT_APP_API_KEY}`
           );
         }
-        if (popular) {
+        if (isPopular) {
           response = await axios.get(
             `${process.env.REACT_APP_BASE_URL}${moviesUrl.popular}?api_key=${process.env.REACT_APP_API_KEY}`
           );
         }
-        if (!nowPlaying && !popular) {
+        if (!isNowPlaying && !isPopular) {
           response = await axios.get(
             `${process.env.REACT_APP_BASE_URL}${moviesUrl.upcoming}?api_key=${process.env.REACT_APP_API_KEY}`
           );
@@ -54,7 +69,7 @@ const Home = () => {
     fetchMovie();
   }, [location.pathname]);
 
-  const handleAddCollectionButton = (movie) => {
+  const handleAddFavoritesButton = (movie) => {
     const { poster_path, vote_average, title, overview, id } = movie;
     setFavoritedMovies((prevState) => {
       const combinedMovies = [
@@ -69,35 +84,34 @@ const Home = () => {
   const renderMovies = () => {
     return (
       <>
-        {!fetchingMovies &&
-          movies.map((movie) => {
-            const { poster_path, vote_average, title, overview, id } = movie;
-            const isDisabled = favoritedMovies.find((movie) => {
-              return movie.id === id;
-            });
-            return (
-              <Col xs={24} md={12} lg={8} xl={6}>
-                <div
-                  style={{
-                    color: "white",
-                  }}
-                >
-                  <MovieCard
-                    poster_path={poster_path}
-                    id={id}
-                    vote_average={vote_average}
-                    title={title}
-                    overview={overview}
-                    price={calculatePrice(vote_average)}
-                    handleAddCollectionButton={() =>
-                      handleAddCollectionButton(movie)
-                    }
-                    disabled={isDisabled}
-                  />
-                </div>
-              </Col>
-            );
-          })}
+        {movies.map((movie) => {
+          const { poster_path, vote_average, title, overview, id } = movie;
+          const isDisabled = favoritedMovies.find((movie) => {
+            return movie.id === id;
+          });
+          return (
+            <Col xs={24} md={12} lg={8} xl={6}>
+              <div
+                style={{
+                  color: "white",
+                }}
+              >
+                <MovieCard
+                  poster_path={poster_path}
+                  id={id}
+                  vote_average={vote_average}
+                  title={title}
+                  overview={overview}
+                  price={calculatePrice(vote_average)}
+                  handleAddCollectionButton={() =>
+                    handleAddFavoritesButton(movie)
+                  }
+                  disabled={isDisabled}
+                />
+              </div>
+            </Col>
+          );
+        })}
       </>
     );
   };
