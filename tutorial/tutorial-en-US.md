@@ -34,7 +34,6 @@ In this tutorial we will not care much with any file that is inside `components`
 
 Why doing this? because its very close to a real case in work industry, where usually you need to show data from network request dan process it. In term of e-commerce website, adding favorite to movie is equivalent to real world case where you have some kind of wish list.
 
-===========================================================================================================================================================
 #### Getting started
 
 Alright, the first thing that we are going to do is creating our project usint `create-react-app`, if your already have npm installed with version of 5.2+ then the things that you need to do is `npx create-react-app toko-flix`, the code will create a folder with a name of toko-flix.
@@ -176,7 +175,7 @@ In those lines we are defining our route that we are going to have in our projec
 
 It can be seen that we wrap our code with component `Switch`, this component makes us only able to render one from the three components that we define inside that block scope above.
 
-#### Pages
+### Pages
 
 As you can see that we are doing routing to render three components, dan those components will be placed inside a folder with name of `pages`
 
