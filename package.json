@@ -1,5 +1,6 @@
 {
   "name": "toko-flix",
+  "homepage": "https://mirzachilman.github.io/toko-flix/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
