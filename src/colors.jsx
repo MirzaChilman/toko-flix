@@ -1,1 +1,0 @@
-export const background_color_main = "#323232"
