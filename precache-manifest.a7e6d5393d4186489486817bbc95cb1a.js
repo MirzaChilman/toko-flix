@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9b60b7cfc94896dfbaa3af051da8ea9e",
+    "revision": "a64f5053eb3a0dfb7ffd3562d817c808",
     "url": "/toko-flix/index.html"
   },
   {
@@ -12,12 +12,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/toko-flix/static/css/1.870455aa.chunk.css"
   },
   {
-    "revision": "1e0eb2e4125ee1706631",
+    "revision": "bbb502b05746028196cc",
     "url": "/toko-flix/static/css/5.a82d9473.chunk.css"
   },
   {
-    "revision": "dcdd05ced0b7e0ee84aa",
-    "url": "/toko-flix/static/css/6.95da4085.chunk.css"
+    "revision": "59510f3528e265bc131b",
+    "url": "/toko-flix/static/css/6.97d4aa5b.chunk.css"
   },
   {
     "revision": "fa3f350ecbd31017482c",
@@ -28,8 +28,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/toko-flix/static/css/8.c1613900.chunk.css"
   },
   {
-    "revision": "d97c6bcfeda707181af9",
-    "url": "/toko-flix/static/css/main.3c4fe603.chunk.css"
+    "revision": "6941a1fded414633a595",
+    "url": "/toko-flix/static/css/main.9f1ca153.chunk.css"
   },
   {
     "revision": "68a3d53dc8ce605afe69",
@@ -48,15 +48,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/toko-flix/static/js/2.6d55a5b4.chunk.js"
   },
   {
-    "revision": "1e0eb2e4125ee1706631",
-    "url": "/toko-flix/static/js/5.c82d85d6.chunk.js"
+    "revision": "bbb502b05746028196cc",
+    "url": "/toko-flix/static/js/5.a20105c8.chunk.js"
   },
   {
     "revision": "522e03d803bfdb0e0cda4e24f58dcf37",
-    "url": "/toko-flix/static/js/5.c82d85d6.chunk.js.LICENSE.txt"
+    "url": "/toko-flix/static/js/5.a20105c8.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "dcdd05ced0b7e0ee84aa",
+    "revision": "59510f3528e265bc131b",
     "url": "/toko-flix/static/js/6.7cf9b968.chunk.js"
   },
   {
@@ -72,11 +72,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/toko-flix/static/js/9.7e5f192f.chunk.js"
   },
   {
-    "revision": "d97c6bcfeda707181af9",
+    "revision": "6941a1fded414633a595",
     "url": "/toko-flix/static/js/main.4e887ead.chunk.js"
   },
   {
-    "revision": "c015b3ff9be801a35f03",
-    "url": "/toko-flix/static/js/runtime-main.5d4f9f58.js"
+    "revision": "da8736dd683c636078a2",
+    "url": "/toko-flix/static/js/runtime-main.a639bb1d.js"
   }
 ]);
