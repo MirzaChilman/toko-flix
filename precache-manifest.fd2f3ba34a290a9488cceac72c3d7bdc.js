@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6f7fb0d7913e2bdaf53739841a4cf413",
+    "revision": "796bc01faa441fa4542d0ab4d7c7a66e",
     "url": "/toko-flix/index.html"
   },
   {
-    "revision": "4fe68aff0ee9ee99f636",
-    "url": "/toko-flix/static/css/0.9800c8c2.chunk.css"
+    "revision": "a1c22ec6212c82d053ec",
+    "url": "/toko-flix/static/css/0.9dc5ddf6.chunk.css"
   },
   {
     "revision": "7d21fb13d7d36ba86573",
@@ -32,7 +32,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/toko-flix/static/css/main.9f1ca153.chunk.css"
   },
   {
-    "revision": "4fe68aff0ee9ee99f636",
+    "revision": "a1c22ec6212c82d053ec",
     "url": "/toko-flix/static/js/0.bbb7c609.chunk.js"
   },
   {
@@ -76,7 +76,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/toko-flix/static/js/main.7454ad9c.chunk.js"
   },
   {
-    "revision": "a91fc074dec711ac1c6e",
-    "url": "/toko-flix/static/js/runtime-main.fbb845aa.js"
+    "revision": "eacb1321b74983c3de8d",
+    "url": "/toko-flix/static/js/runtime-main.ea4c2c9b.js"
   }
 ]);
