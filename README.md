@@ -1,7 +1,7 @@
 # Overview
 This project is built using [`create-react-app`](https://github.com/facebook/create-react-app). The project is an improvement of an app that has been built 2 years ago (see [legacy code](https://github.com/MirzaChilman/mini-project/tree/legacy)). The project originally idea inspired by [netflix](http://netflix.com/), in the original apps the user able to buy an movie that later will be stored to local storage. You can see it in action [here](https://5f9668cc108049698f8cbd8e--jolly-panini-1d05b8.netlify.app/)
 
-The version 2 of the apps has almost similar functionality but with better code and also change the core functionality from buying a movie to add favorite movies 
+The version 2 of the apps has almost similar functionality but with better code and also change the core functionality from buying a movie to add favorite movies
 
 # How to run
 
@@ -13,7 +13,7 @@ for development purpose please do:
 
 for non-development purpose please do:
 1. Run `npm install`
-2. Run `npm start` 
+2. Run `npm start`
 
 # Tutorial
 
