@@ -1,6 +1,6 @@
 {
   "files": {
-    "static/css/0.9dc5ddf6.chunk.css": "/toko-flix/static/css/0.9dc5ddf6.chunk.css",
+    "static/css/0.9800c8c2.chunk.css": "/toko-flix/static/css/0.9800c8c2.chunk.css",
     "static/js/0.bbb7c609.chunk.js": "/toko-flix/static/js/0.bbb7c609.chunk.js",
     "static/js/0.bbb7c609.chunk.js.map": "/toko-flix/static/js/0.bbb7c609.chunk.js.map",
     "static/css/1.870455aa.chunk.css": "/toko-flix/static/css/1.870455aa.chunk.css",
@@ -11,8 +11,8 @@
     "main.css": "/toko-flix/static/css/main.9f1ca153.chunk.css",
     "main.js": "/toko-flix/static/js/main.7454ad9c.chunk.js",
     "main.js.map": "/toko-flix/static/js/main.7454ad9c.chunk.js.map",
-    "runtime-main.js": "/toko-flix/static/js/runtime-main.ea4c2c9b.js",
-    "runtime-main.js.map": "/toko-flix/static/js/runtime-main.ea4c2c9b.js.map",
+    "runtime-main.js": "/toko-flix/static/js/runtime-main.fbb845aa.js",
+    "runtime-main.js.map": "/toko-flix/static/js/runtime-main.fbb845aa.js.map",
     "static/css/5.a82d9473.chunk.css": "/toko-flix/static/css/5.a82d9473.chunk.css",
     "static/js/5.18b52e29.chunk.js": "/toko-flix/static/js/5.18b52e29.chunk.js",
     "static/js/5.18b52e29.chunk.js.map": "/toko-flix/static/js/5.18b52e29.chunk.js.map",
@@ -30,9 +30,9 @@
     "static/js/10.6f501588.chunk.js": "/toko-flix/static/js/10.6f501588.chunk.js",
     "static/js/10.6f501588.chunk.js.map": "/toko-flix/static/js/10.6f501588.chunk.js.map",
     "index.html": "/toko-flix/index.html",
-    "precache-manifest.fd2f3ba34a290a9488cceac72c3d7bdc.js": "/toko-flix/precache-manifest.fd2f3ba34a290a9488cceac72c3d7bdc.js",
+    "precache-manifest.c8276fec9bac5a5fdb27fa7760ad91b8.js": "/toko-flix/precache-manifest.c8276fec9bac5a5fdb27fa7760ad91b8.js",
     "service-worker.js": "/toko-flix/service-worker.js",
-    "static/css/0.9dc5ddf6.chunk.css.map": "/toko-flix/static/css/0.9dc5ddf6.chunk.css.map",
+    "static/css/0.9800c8c2.chunk.css.map": "/toko-flix/static/css/0.9800c8c2.chunk.css.map",
     "static/css/1.870455aa.chunk.css.map": "/toko-flix/static/css/1.870455aa.chunk.css.map",
     "static/css/5.a82d9473.chunk.css.map": "/toko-flix/static/css/5.a82d9473.chunk.css.map",
     "static/css/6.125ef1ca.chunk.css.map": "/toko-flix/static/css/6.125ef1ca.chunk.css.map",
@@ -42,7 +42,7 @@
     "static/js/5.18b52e29.chunk.js.LICENSE.txt": "/toko-flix/static/js/5.18b52e29.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.ea4c2c9b.js",
+    "static/js/runtime-main.fbb845aa.js",
     "static/css/5.a82d9473.chunk.css",
     "static/js/5.18b52e29.chunk.js",
     "static/css/main.9f1ca153.chunk.css",
