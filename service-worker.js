@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/toko-flix/precache-manifest.a7e6d5393d4186489486817bbc95cb1a.js"
+  "/toko-flix/precache-manifest.c8276fec9bac5a5fdb27fa7760ad91b8.js"
 );
 
 self.addEventListener('message', (event) => {
